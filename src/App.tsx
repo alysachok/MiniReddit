@@ -1,17 +1,19 @@
-import React from 'react';
-import './App.css';
+import { FC, lazy } from "react"
+import { createBrowserRouter, RouterProvider } from "react-router-dom"
+import ErrorPage from "./ErrorPage"
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <div>Header</div>
-      </header>
-      <main>
-        <h1>Main</h1>
-      </main>
-    </div>
-  );
-}
+const Root = lazy(async () => await import("./Root"))
 
-export default App;
+const router = createBrowserRouter([
+  {
+    path: "*",
+    element: <Root />,
+    errorElement: <ErrorPage />
+  },
+])
+
+const App: FC = () => (
+      <RouterProvider router={router} />
+)
+
+export default App
