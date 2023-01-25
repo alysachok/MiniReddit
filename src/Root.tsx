@@ -23,6 +23,8 @@ import Subreddit from "./features/Subreddit/Subreddit"
 import Post from "./features/Post/Post"
 import { Suspense } from "react"
 import { Route, Routes, Link } from "react-router-dom"
+import Search from "./features/Search/Search"
+import Typography from '@mui/material/Typography'
 
 const drawerWidth = 240;
 
@@ -52,14 +54,14 @@ interface AppBarProps extends MuiAppBarProps {
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
 })<AppBarProps>(({ theme, open }) => ({
-  backgroundColor: "#E3E0E0",
+  backgroundColor: "white",
   transition: theme.transitions.create(['margin', 'width'], {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
   }),
   ...(open && {
     width: `calc(100% - ${drawerWidth}px)`,
-    backgroundColor: "#E3E0E0",
+    backgroundColor: "white",
     transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.easeOut,
       duration: theme.transitions.duration.enteringScreen,
@@ -93,27 +95,35 @@ export default function PersistentDrawerRight() {
     <Box sx={{ display: 'flex'}}>
       <CssBaseline />
       <AppBar position="fixed" open={open}>
-        <Toolbar sx={{ justifyContent: "space-between"}}>
-            <Box sx={{ display: "flex", flexDirection: "row"}}>
+        <Toolbar sx={{ display: "flex"}}>
+            <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center"}}>
                 <Link to="/">
-                    <IconButton >
-                        <img width="60" height="60" src={require('./logo.webp') } alt="logo" />
-                    </IconButton>
+                     <img width="50" height="50" border-radius = "50%" src={require('./logo.png') } alt="logo" />
                 </Link> 
+                <Typography
+                    variant="h6"
+                    noWrap
+                    component="div"
+                    sx={{ display: { xs: 'none', sm: 'block', color: "black", marginLeft: "10px"}}}
+                    >
+                    <strong>Mini</strong>Reddit
+                </Typography>
             </Box>
-            <h1 style={{color: "grey"}}><strong>Mini</strong>Reddit</h1>
+            <Box sx={{ display: "flex", justifyContent: "space-between", flexGrow: "1"}}> 
+            <Search />
             <IconButton
-                color="inherit"
                 aria-label="open drawer"
                 edge="end"
                 onClick={handleDrawerOpen}
-                sx={{ ...(open && { display: 'none' }) }}
+                sx={{ ...(open && { display: 'none'}) }}
             >
                 <MenuIcon />
             </IconButton>
+
+            </Box>
         </Toolbar>
       </AppBar>
-      <Main open={open}>
+      <Main open={open} >
         <DrawerHeader />
          <Suspense fallback={<div>Loading...</div>}>
             <Routes>
