@@ -9,11 +9,9 @@ const router = createBrowserRouter([
     path: "*",
     element: <Root />,
     errorElement: <ErrorPage />
-  },
+  }
 ])
 
-const App: FC = () => (
-      <RouterProvider router={router} />
-)
+const App: FC = () => <RouterProvider router={router} />
 
 export default App
