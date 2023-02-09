@@ -1,12 +1,12 @@
-import React, { FC, useState } from "react"
+import { ChangeEvent, FC, useState } from "react"
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react"
+import CloseIcon from "@mui/icons-material/Close"
+import SearchIcon from "@mui/icons-material/Search"
 import { Theme, useTheme } from "@mui/material"
 import Box from "@mui/material/Box"
-import SearchIcon from "@mui/icons-material/Search"
-import CloseIcon from "@mui/icons-material/Close"
-import TextField from "@mui/material/TextField"
 import InputAdornment from "@mui/material/InputAdornment"
+import TextField from "@mui/material/TextField"
 
 const getStyles = (theme: Theme) => ({
   search: css({
@@ -26,13 +26,11 @@ const SearchBar: FC = () => {
   const theme = useTheme()
   const styles = getStyles(theme)
 
-  console.log(theme)
-
   // State to store value from the input field
   const [inputValue, setInputValue] = useState("")
 
   // Input Field handler
-  const handleUserInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleUserInput = (e: ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value)
   }
 
@@ -45,7 +43,7 @@ const SearchBar: FC = () => {
     <Box
       sx={{
         display: "flex",
-        marginLeft: theme.spacing(5)
+        ml: theme.spacing(5)
       }}
     >
       <TextField
@@ -61,7 +59,6 @@ const SearchBar: FC = () => {
             </InputAdornment>
           )
         }}
-        className="search"
         css={styles.search}
         id="outlined-adornment"
         onChange={handleUserInput}

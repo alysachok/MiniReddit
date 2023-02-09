@@ -94,7 +94,7 @@ export default function PersistentDrawerRight() {
   }
 
   return (
-    <Box sx={{ display: "flex", backgroundColor: "rgba(218,223,229,255)" }}>
+    <Box sx={{ display: "flex", backgroundColor: theme.palette.primary.main }}>
       <CssBaseline />
       <AppBar open={open} position="fixed">
         <Toolbar sx={{ display: "flex" }}>
@@ -108,7 +108,7 @@ export default function PersistentDrawerRight() {
                 display: {
                   xs: "none",
                   sm: "block",
-                  color: "black",
+                  color: theme.palette.secondary.main,
                   marginLeft: theme.spacing(1)
                 }
               }}
@@ -140,6 +140,9 @@ export default function PersistentDrawerRight() {
         <Suspense fallback={<div>Loading...</div>}>
           <Routes>
             <Route element={<Home />} path="/" />
+            <Route element={<Home />} path="/best" />
+            <Route element={<Home />} path="/hot" />
+            <Route element={<Home />} path="/new" />
             <Route element={<Posts />} path="/posts" />
             <Route element={<Subreddit />} path="/subreddit/:id" />
             <Route element={<Post />} path="/post/:id" />

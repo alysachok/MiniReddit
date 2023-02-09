@@ -10,9 +10,8 @@ const Posts: FC = () => (
       sx={{
         margin: "auto",
         height: 500,
-        backgroundColor: "primary.dark",
+        backgroundColor: "primary.light",
         "&:hover": {
-          backgroundColor: "primary.main",
           opacity: [0.9, 0.8, 0.7]
         }
       }}
