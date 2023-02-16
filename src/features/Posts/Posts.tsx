@@ -21,9 +21,10 @@ interface PostsProps {
 }
 
 const Posts: FC<PostsProps> = ({ tag }) => {
+  const lastTag = !tag ? "best" : tag
   const theme = useTheme()
 
-  const selectedByTag = posts.filter((post) => post.tags.includes(tag))
+  const selectedByTag = posts.filter((post) => post.tags.includes(lastTag))
 
   return (
     <Box>

@@ -60,7 +60,7 @@ const Home: FC = () => {
           margin="2rem"
           spacing={{ xs: 1, sm: 2, md: 4 }}
         >
-          <TopLink icon={<StarBorderIcon />} label="Best" to="/best" />
+          <TopLink icon={<StarBorderIcon />} label="Best" to="/" />
           <TopLink
             icon={<LocalFireDepartmentOutlinedIcon />}
             label="Hot"

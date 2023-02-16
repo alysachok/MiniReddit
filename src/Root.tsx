@@ -140,7 +140,6 @@ export default function PersistentDrawerRight() {
         <Suspense fallback={<div>Loading...</div>}>
           <Routes>
             <Route element={<Home />} path="/" />
-            <Route element={<Home />} path="/best" />
             <Route element={<Home />} path="/hot" />
             <Route element={<Home />} path="/new" />
             <Route element={<Posts />} path="/posts" />
