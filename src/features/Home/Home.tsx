@@ -53,22 +53,24 @@ const Home: FC = () => {
 
   return (
     <Box>
-      <Box sx={{ backgroundColor: "white", p: "1rem" }}>
-        <Stack
-          direction={{ xs: "column", sm: "row" }}
-          justifyContent="center"
-          margin="2rem"
-          spacing={{ xs: 1, sm: 2, md: 4 }}
-        >
-          <TopLink icon={<StarBorderIcon />} label="Best" to="/" />
-          <TopLink
-            icon={<LocalFireDepartmentOutlinedIcon />}
-            label="Hot"
-            to="/hot"
-          />
-          <TopLink icon={<AutorenewOutlinedIcon />} label="New" to="/new" />
-        </Stack>
-      </Box>
+      <Stack alignItems="center">
+        <Box sx={{ backgroundColor: "white", p: "1rem", width: "70%" }}>
+          <Stack
+            direction={{ xs: "column", sm: "row" }}
+            justifyContent="center"
+            margin="2rem"
+            spacing={{ xs: 1, sm: 2, md: 4 }}
+          >
+            <TopLink icon={<StarBorderIcon />} label="Best" to="/" />
+            <TopLink
+              icon={<LocalFireDepartmentOutlinedIcon />}
+              label="Hot"
+              to="/hot"
+            />
+            <TopLink icon={<AutorenewOutlinedIcon />} label="New" to="/new" />
+          </Stack>
+        </Box>
+      </Stack>
       <Posts tag={tag} />
     </Box>
   )
