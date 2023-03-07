@@ -58,8 +58,8 @@ const Home: FC = () => {
           <Stack
             direction={{ xs: "column", sm: "row" }}
             justifyContent="center"
-            margin="2rem"
             spacing={{ xs: 1, sm: 2, md: 4 }}
+            sx={{ m: "2rem" }}
           >
             <TopLink icon={<StarBorderIcon />} label="Best" to="/" />
             <TopLink

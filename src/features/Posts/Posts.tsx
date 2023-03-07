@@ -1,58 +1,13 @@
 import { FC } from "react"
 import Box from "@mui/material/Box"
 import { useTheme } from "@mui/material/styles"
-// import { Link } from "react-router-dom"
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline"
 import { Stack, Typography } from "@mui/material"
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward"
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward"
 import Avatar from "@mui/material/Avatar"
 import CardMedia from "@mui/material/CardMedia"
-
-interface Post {
-  id: number
-  title: string
-  tags: any[]
-  image: string
-}
-
-const posts: Post[] = [
-  {
-    id: 0,
-    title: "Funny",
-    tags: ["new"],
-    image:
-      "https://media.istockphoto.com/id/1322277517/photo/wild-grass-in-the-mountains-at-sunset.jpg?s=612x612&w=0&k=20&c=6mItwwFFGqKNKEAzv0mv6TaxhLN3zSE43bWmFN--J5w="
-  },
-  {
-    id: 1,
-    title: "Auto",
-    tags: ["hot"],
-    image:
-      "https://media.gettyimages.com/id/157373207/photo/balanced-stones-on-a-pebble-beach-during-sunset.jpg?s=612x612&w=gi&k=20&c=o2EIbVkoOYim9J_rHm0YUic16Sl42MuKgS9GOOH6_xU="
-  },
-  {
-    id: 2,
-    title: "Nails",
-    tags: ["new"],
-    image:
-      "https://imgv3.fotor.com/images/blog-cover-image/part-blurry-image.jpg"
-  },
-  {
-    id: 3,
-    title: "News",
-    tags: ["best"],
-    image:
-      "https://www.simplilearn.com/ice9/free_resources_article_thumb/what_is_image_Processing.jpg"
-  },
-  {
-    id: 4,
-    title: "Popular",
-    tags: ["best", "hot", "new"],
-    image:
-      "https://cdn.searchenginejournal.com/wp-content/uploads/2022/06/image-search-1600-x-840-px-62c6dc4ff1eee-sej.png"
-  }
-]
+import posts from "../utils"
 
 interface PostsProps {
   tag?: string
@@ -69,6 +24,14 @@ const Posts: FC<PostsProps> = ({ tag }) => {
       height: "100%",
       width: "100%",
       overflow: "auto"
+    },
+    postWrapper: {
+      display: "flex",
+      height: "100%",
+      marginTop: theme.spacing(3)
+    },
+    linkStyle: {
+      textDecoration: "none"
     }
   }
 
@@ -87,10 +50,10 @@ const Posts: FC<PostsProps> = ({ tag }) => {
               }
             }}
           >
-            <Stack direction="row" height="100%" margin="20px 0px 25px">
+            <Box sx={styles.postWrapper}>
               <Box
                 sx={{
-                  width: "3%",
+                  width: "4%",
                   display: {
                     xs: "none",
                     sm: "flex"
@@ -117,7 +80,7 @@ const Posts: FC<PostsProps> = ({ tag }) => {
                   }
                 }}
               >
-                <Stack margin="1rem">
+                <Stack margin={2}>
                   <Stack alignItems="center" direction="row" spacing={2}>
                     <Avatar
                       alt="Remy Sharp"
@@ -125,7 +88,7 @@ const Posts: FC<PostsProps> = ({ tag }) => {
                       sx={{ width: 24, height: 24 }}
                     />
                     <Typography sx={{ fontWeight: "bold" }}>
-                      Chanel Name
+                      Channel Name
                     </Typography>
                     <Typography
                       sx={{
@@ -178,7 +141,7 @@ const Posts: FC<PostsProps> = ({ tag }) => {
                   </Stack>
                 </Stack>
               </Box>
-            </Stack>
+            </Box>
           </Box>
         ))}
       </Box>
