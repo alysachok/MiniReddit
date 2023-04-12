@@ -54,12 +54,18 @@ const Home: FC = () => {
   return (
     <Box>
       <Stack alignItems="center">
-        <Box sx={{ backgroundColor: "white", p: "1rem", width: "70%" }}>
+        <Box
+          sx={{
+            backgroundColor: "white",
+            p: "1rem",
+            width: { xs: "100%", sm: "80%", md: "70%" }
+          }}
+        >
           <Stack
-            direction={{ xs: "column", sm: "row" }}
+            direction="row"
             justifyContent="center"
             spacing={{ xs: 1, sm: 2, md: 4 }}
-            sx={{ m: "2rem" }}
+            sx={{ m: { xs: "0rem", md: "2rem" } }}
           >
             <TopLink icon={<StarBorderIcon />} label="Best" to="/" />
             <TopLink

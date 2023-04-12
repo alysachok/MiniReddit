@@ -37,7 +37,11 @@ const Posts: FC<PostsProps> = ({ tag }) => {
 
   return (
     <Stack alignItems="center">
-      <Box sx={{ width: "70%" }}>
+      <Box
+        sx={{
+          width: { xs: "100%", sm: "80%", md: "70%" }
+        }}
+      >
         {selectedByTag.map((post) => (
           <Box
             key={post.id}

@@ -130,7 +130,7 @@ export default function PersistentDrawerRight() {
               onClick={handleDrawerOpen}
               sx={{ ...(open && { display: "none" }) }}
             >
-              <MenuIcon />
+              <MenuIcon sx={{ display: { xs: "none", md: "block" } }} />
             </IconButton>
           </Stack>
         </Toolbar>
