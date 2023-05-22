@@ -128,7 +128,10 @@ export default function PersistentDrawerRight() {
               aria-label="open drawer"
               edge="end"
               onClick={handleDrawerOpen}
-              sx={{ ...(open && { display: "none" }) }}
+              sx={{
+                display: { xs: "none", sm: "none", md: "block" },
+                ...(open && { display: "none" })
+              }}
             >
               <MenuIcon />
             </IconButton>
@@ -152,7 +155,7 @@ export default function PersistentDrawerRight() {
         anchor="right"
         open={open}
         sx={{
-          width: drawerWidth,
+          width: { xs: "50%", md: drawerWidth },
           flexShrink: 0,
           "& .MuiDrawer-paper": {
             width: drawerWidth

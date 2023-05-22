@@ -1,20 +1,13 @@
 import { FC } from "react"
 import Box from "@mui/material/Box"
 import { useTheme } from "@mui/material/styles"
-
-interface Post {
-  id: number
-  title: string
-  tags: any[]
-}
-
-const posts: Post[] = [
-  { id: 0, title: "Funny", tags: ["new"] },
-  { id: 1, title: "Auto", tags: ["hot"] },
-  { id: 2, title: "Nails", tags: ["new"] },
-  { id: 3, title: "News", tags: ["best"] },
-  { id: 4, title: "Popular", tags: ["best", "hot", "new"] }
-]
+import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline"
+import { Stack, Typography } from "@mui/material"
+import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward"
+import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward"
+import Avatar from "@mui/material/Avatar"
+import CardMedia from "@mui/material/CardMedia"
+import posts from "../utils"
 
 interface PostsProps {
   tag?: string
@@ -26,24 +19,137 @@ const Posts: FC<PostsProps> = ({ tag }) => {
 
   const selectedByTag = posts.filter((post) => post.tags.includes(lastTag))
 
+  const styles = {
+    media: {
+      height: "100%",
+      width: "100%",
+      overflow: "auto"
+    },
+    postWrapper: {
+      display: "flex",
+      height: "100%",
+      marginTop: theme.spacing(3)
+    },
+    linkStyle: {
+      textDecoration: "none"
+    }
+  }
+
   return (
-    <Box>
-      {selectedByTag.map((post) => (
-        <Box key={post.id}>
-          <h1 style={{ color: theme.palette.secondary.main }}>{post.title}</h1>
+    <Stack alignItems="center">
+      <Box
+        sx={{
+          width: { xs: "100%", sm: "80%", md: "70%" }
+        }}
+      >
+        {selectedByTag.map((post) => (
           <Box
+            key={post.id}
             sx={{
               margin: "auto",
-              height: 500,
+              height: theme.spacing(100),
               backgroundColor: "primary.light",
               "&:hover": {
-                opacity: [0.9, 0.8, 0.7]
+                boxShadow: "1px 2px 2px gray"
               }
             }}
-          />
-        </Box>
-      ))}
-    </Box>
+          >
+            <Box sx={styles.postWrapper}>
+              <Box
+                sx={{
+                  width: "4%",
+                  display: {
+                    xs: "none",
+                    sm: "flex"
+                  },
+                  flexDirection: "column",
+                  justifyContent: "flex-start",
+                  alignItems: "center",
+                  color: theme.palette.secondary.light,
+                  marginTop: theme.spacing(2)
+                }}
+              >
+                <ArrowUpwardIcon />
+                <Typography>1</Typography>
+                <ArrowDownwardIcon />
+              </Box>
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "stretch",
+                  backgroundColor: "white",
+                  width: "100%",
+                  "&:hover": {
+                    boxShadow: "1px 2px 2px gray"
+                  }
+                }}
+              >
+                <Stack margin={2}>
+                  <Stack alignItems="center" direction="row" spacing={2}>
+                    <Avatar
+                      alt="Remy Sharp"
+                      src="/static/images/avatar/1.jpg"
+                      sx={{ width: 24, height: 24 }}
+                    />
+                    <Typography sx={{ fontWeight: "bold" }}>
+                      Channel Name
+                    </Typography>
+                    <Typography
+                      sx={{
+                        color: theme.palette.secondary.light,
+                        display: { xs: "none", sm: "block" }
+                      }}
+                    >
+                      {" "}
+                      -{" "}
+                    </Typography>
+                    <Typography
+                      sx={{
+                        color: theme.palette.secondary.light,
+                        display: { xs: "none", sm: "block" }
+                      }}
+                      variant="body2"
+                    >
+                      Posted By Username 6 days ago
+                    </Typography>
+                  </Stack>
+                  <Typography
+                    style={{
+                      color: theme.palette.secondary.light,
+                      marginBottom: theme.spacing(1),
+                      marginTop: theme.spacing(1)
+                    }}
+                    variant="h4"
+                  >
+                    {post.title}
+                  </Typography>
+                  <CardMedia
+                    alt="Reddit image"
+                    component="img"
+                    image={post.image}
+                    style={styles.media}
+                  />
+                  <Stack
+                    color={theme.palette.secondary.light}
+                    flexDirection="row"
+                    marginTop={theme.spacing(2)}
+                  >
+                    <ChatBubbleOutlineIcon />
+                    <Typography
+                      style={{
+                        marginLeft: theme.spacing(1)
+                      }}
+                    >
+                      26 Comments
+                    </Typography>
+                  </Stack>
+                </Stack>
+              </Box>
+            </Box>
+          </Box>
+        ))}
+      </Box>
+    </Stack>
   )
 }
 
