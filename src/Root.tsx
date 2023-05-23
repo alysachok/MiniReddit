@@ -94,7 +94,15 @@ export default function PersistentDrawerRight() {
   }
 
   return (
-    <Box sx={{ display: "flex", backgroundColor: theme.palette.primary.main }}>
+    <Box
+      sx={{
+        display: "flex",
+        width: "100%",
+        margin: "0px",
+        flexGrow: "1",
+        position: "relative"
+      }}
+    >
       <CssBaseline />
       <AppBar open={open} position="fixed">
         <Toolbar sx={{ display: "flex" }}>
@@ -138,7 +146,16 @@ export default function PersistentDrawerRight() {
           </Stack>
         </Toolbar>
       </AppBar>
-      <Main open={open}>
+      <Main
+        open={open}
+        sx={{
+          backgroundColor: theme.palette.primary.main,
+          position: "absolute",
+          width: "100%",
+          overflowY: "auto",
+          padding: { xs: "0.5rem" }
+        }}
+      >
         <DrawerHeader />
         <Suspense fallback={<div>Loading...</div>}>
           <Routes>

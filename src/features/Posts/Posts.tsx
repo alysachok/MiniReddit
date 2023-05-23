@@ -28,7 +28,7 @@ const Posts: FC<PostsProps> = ({ tag }) => {
     postWrapper: {
       display: "flex",
       height: "100%",
-      marginTop: theme.spacing(3)
+      marginTop: { xs: theme.spacing(1.5), md: theme.spacing(3) }
     },
     linkStyle: {
       textDecoration: "none"
@@ -39,7 +39,7 @@ const Posts: FC<PostsProps> = ({ tag }) => {
     <Stack alignItems="center">
       <Box
         sx={{
-          width: { xs: "100%", sm: "80%", md: "70%" }
+          width: { xs: "100%", md: "80%" }
         }}
       >
         {selectedByTag.map((post) => (
