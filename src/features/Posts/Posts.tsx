@@ -20,16 +20,61 @@ const Posts: FC<PostsProps> = ({ tag }) => {
   const selectedByTag = posts.filter((post) => post.tags.includes(lastTag))
 
   const styles = {
+    voteContaner: {
+      margin: "auto",
+      height: theme.spacing(100),
+      backgroundColor: theme.palette.primary.light,
+      "&:hover": {
+        boxShadow: "1px 2px 2px gray"
+      }
+    },
+
+    voteWrapper: {
+      display: "flex",
+      height: "100%",
+      marginTop: { xs: theme.spacing(1.5), md: theme.spacing(3) }
+    },
+
+    vote: {
+      width: "4%",
+      display: {
+        xs: "none",
+        sm: "flex"
+      },
+      flexDirection: "column",
+      justifyContent: "flex-start",
+      alignItems: "center",
+      color: theme.palette.secondary.light,
+      marginTop: theme.spacing(2)
+    },
+
+    postContaner: {
+      display: "flex",
+      alignItems: "stretch",
+      backgroundColor: "white",
+      width: "100%",
+      "&:hover": {
+        boxShadow: "1px 2px 2px gray"
+      }
+    },
+
+    typography: {
+      color: theme.palette.secondary.light,
+      display: { xs: "none", sm: "block" }
+    },
+
+    titlePostTypography: {
+      color: theme.palette.secondary.light,
+      marginBottom: theme.spacing(1),
+      marginTop: theme.spacing(1)
+    },
+
     media: {
       height: "100%",
       width: "100%",
       overflow: "auto"
     },
-    postWrapper: {
-      display: "flex",
-      height: "100%",
-      marginTop: { xs: theme.spacing(1.5), md: theme.spacing(3) }
-    },
+
     linkStyle: {
       textDecoration: "none"
     }
@@ -43,47 +88,14 @@ const Posts: FC<PostsProps> = ({ tag }) => {
         }}
       >
         {selectedByTag.map((post) => (
-          <Box
-            key={post.id}
-            sx={{
-              margin: "auto",
-              height: theme.spacing(100),
-              backgroundColor: "primary.light",
-              "&:hover": {
-                boxShadow: "1px 2px 2px gray"
-              }
-            }}
-          >
-            <Box sx={styles.postWrapper}>
-              <Box
-                sx={{
-                  width: "4%",
-                  display: {
-                    xs: "none",
-                    sm: "flex"
-                  },
-                  flexDirection: "column",
-                  justifyContent: "flex-start",
-                  alignItems: "center",
-                  color: theme.palette.secondary.light,
-                  marginTop: theme.spacing(2)
-                }}
-              >
+          <Box key={post.id} sx={styles.voteContaner}>
+            <Box sx={styles.voteWrapper}>
+              <Box sx={styles.vote}>
                 <ArrowUpwardIcon />
                 <Typography>1</Typography>
                 <ArrowDownwardIcon />
               </Box>
-              <Box
-                sx={{
-                  display: "flex",
-                  alignItems: "stretch",
-                  backgroundColor: "white",
-                  width: "100%",
-                  "&:hover": {
-                    boxShadow: "1px 2px 2px gray"
-                  }
-                }}
-              >
+              <Box sx={styles.postContaner}>
                 <Stack margin={2}>
                   <Stack alignItems="center" direction="row" spacing={2}>
                     <Avatar
@@ -94,33 +106,12 @@ const Posts: FC<PostsProps> = ({ tag }) => {
                     <Typography sx={{ fontWeight: "bold" }}>
                       Channel Name
                     </Typography>
-                    <Typography
-                      sx={{
-                        color: theme.palette.secondary.light,
-                        display: { xs: "none", sm: "block" }
-                      }}
-                    >
-                      {" "}
-                      -{" "}
-                    </Typography>
-                    <Typography
-                      sx={{
-                        color: theme.palette.secondary.light,
-                        display: { xs: "none", sm: "block" }
-                      }}
-                      variant="body2"
-                    >
+                    <Typography sx={styles.typography}> - </Typography>
+                    <Typography sx={styles.typography} variant="body2">
                       Posted By Username 6 days ago
                     </Typography>
                   </Stack>
-                  <Typography
-                    style={{
-                      color: theme.palette.secondary.light,
-                      marginBottom: theme.spacing(1),
-                      marginTop: theme.spacing(1)
-                    }}
-                    variant="h4"
-                  >
+                  <Typography sx={styles.titlePostTypography} variant="h4">
                     {post.title}
                   </Typography>
                   <CardMedia
