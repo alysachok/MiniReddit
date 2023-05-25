@@ -93,8 +93,35 @@ export default function PersistentDrawerRight() {
     setOpen(false)
   }
 
+  const styles = {
+    mainContaner: {
+      backgroundColor: theme.palette.primary.main,
+      position: "absolute",
+      width: "100%",
+      overflowY: "auto",
+      padding: { xs: "0.5rem" }
+    },
+
+    logoTypography: {
+      display: {
+        xs: "none",
+        sm: "block",
+        color: theme.palette.secondary.main,
+        marginLeft: theme.spacing(1)
+      }
+    },
+
+    drawer: {
+      width: { xs: "50%", md: drawerWidth },
+      flexShrink: 0,
+      "& .MuiDrawer-paper": {
+        width: drawerWidth
+      }
+    }
+  }
+
   return (
-    <Box sx={{ display: "flex", backgroundColor: theme.palette.primary.main }}>
+    <Box>
       <CssBaseline />
       <AppBar open={open} position="fixed">
         <Toolbar sx={{ display: "flex" }}>
@@ -102,18 +129,7 @@ export default function PersistentDrawerRight() {
             <Link to="/">
               <img alt="logo" height="50" src={logo} width="50" />
             </Link>
-            <Typography
-              noWrap
-              sx={{
-                display: {
-                  xs: "none",
-                  sm: "block",
-                  color: theme.palette.secondary.main,
-                  marginLeft: theme.spacing(1)
-                }
-              }}
-              variant="h6"
-            >
+            <Typography noWrap sx={styles.logoTypography} variant="h6">
               <strong>Mini</strong>Reddit
             </Typography>
           </Stack>
@@ -138,7 +154,7 @@ export default function PersistentDrawerRight() {
           </Stack>
         </Toolbar>
       </AppBar>
-      <Main open={open}>
+      <Main open={open} sx={styles.mainContaner}>
         <DrawerHeader />
         <Suspense fallback={<div>Loading...</div>}>
           <Routes>
@@ -154,13 +170,7 @@ export default function PersistentDrawerRight() {
       <Drawer
         anchor="right"
         open={open}
-        sx={{
-          width: { xs: "50%", md: drawerWidth },
-          flexShrink: 0,
-          "& .MuiDrawer-paper": {
-            width: drawerWidth
-          }
-        }}
+        sx={styles.drawer}
         variant="persistent"
       >
         <DrawerHeader>
