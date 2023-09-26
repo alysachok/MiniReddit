@@ -43,4 +43,78 @@ const posts: Post[] = [
   }
 ]
 
+export const extractPartUrl = (url: string) => {
+  // Extracting the domain (e.g., "www.example.com")
+  const domainMatch = url.match(
+    /^(?:https?:\/\/)?(?:[^@\n]+@)?(?:www\.)?([^:/\n]+)/i
+  )
+  const domain = domainMatch ? domainMatch[1] : ""
+
+  return `${domain} ...`
+}
+
+export const formatTimeAgo = (dateUtc: number) => {
+  const now = new Date() // Current date and time
+  const createdUtcTimestamp = dateUtc * 1000 // Convert to milliseconds
+  const date = new Date(createdUtcTimestamp) // Convert the UTC date to a Date object
+
+  const secondsAgo = Math.floor((now.getTime() - date.getTime()) / 1000)
+
+  if (secondsAgo < 60) {
+    return `${secondsAgo} seconds ago`
+  } else if (secondsAgo < 3600) {
+    const minutesAgo = Math.floor(secondsAgo / 60)
+
+    return `${minutesAgo} minute${minutesAgo > 1 ? "s" : ""} ago`
+  } else if (secondsAgo < 86400) {
+    const hoursAgo = Math.floor(secondsAgo / 3600)
+
+    return `${hoursAgo} hour${hoursAgo > 1 ? "s" : ""} ago`
+  } else {
+    const daysAgo = Math.floor(secondsAgo / 86400)
+
+    // Calculate years and months
+    const yearsAgo = Math.floor(daysAgo / 365)
+    const monthsAgo = Math.floor((daysAgo % 365) / 30) // Roughly 30 days per month
+
+    if (yearsAgo > 0) {
+      return `${yearsAgo} year${yearsAgo > 1 ? "s" : ""} ago`
+    } else if (monthsAgo > 0) {
+      return `${monthsAgo} month${monthsAgo > 1 ? "s" : ""} ago`
+    } else {
+      return `${daysAgo} day${daysAgo > 1 ? "s" : ""} ago`
+    }
+  }
+}
+
+export const formatTime = (dateUtc: number) => {
+  const createdUtcTimestamp = dateUtc * 1000 // Convert to milliseconds
+  const formattedDate = new Date(createdUtcTimestamp).toLocaleDateString(
+    "en-US",
+    {
+      year: "numeric",
+      month: "long",
+      day: "numeric"
+    }
+  )
+
+  return formattedDate
+}
+
+export const formatNumber = (value: number | undefined): string => {
+  if (value === undefined || value === null) {
+    return "vote" // Or any other default value you prefer
+  }
+
+  if (value >= 1000000) {
+    return (value / 1000000).toFixed(1) + "m" // Format as million
+  }
+
+  if (value >= 1000) {
+    return (value / 1000).toFixed(1) + "k" // Format as thousand
+  }
+
+  return value.toString() // No formatting needed for smaller numbers
+}
+
 export default posts
