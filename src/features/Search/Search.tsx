@@ -43,7 +43,7 @@ const SearchBar: FC = () => {
     <Box
       sx={{
         display: "flex",
-        ml: { xs: theme.spacing(3), md: theme.spacing(5) }
+        ml: { xs: theme.spacing(1), md: theme.spacing(5) }
       }}
     >
       <TextField

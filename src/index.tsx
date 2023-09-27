@@ -7,12 +7,13 @@ import { ThemeProvider, createTheme } from "@mui/material/styles"
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#DADFE5",
+      main: "#000000de",
+      // main: "#DADFE5",
       light: "#f8f9fa"
     },
     secondary: {
-      main: "rgba(0, 0, 0, 0.87)",
-      light: "#9b9b9b"
+      main: "#bcbcbc",
+      light: "#eff0f2"
     }
   }
 })
@@ -26,7 +27,7 @@ root.render(
     {/* <Provider store={store}> */}
     <ThemeProvider theme={theme}>
       <App />
-      {/* </Provider> */}
     </ThemeProvider>
+    {/* </Provider> */}
   </React.StrictMode>
 )
