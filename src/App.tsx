@@ -1,6 +1,6 @@
 import { FC, lazy } from "react"
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
-import ErrorPage from "./ErrorPage"
+import ErrorPage from "./features/ErrorPage/ErrorPage"
 
 const Root = lazy(async () => await import("./Root"))
 

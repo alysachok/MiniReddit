@@ -1,97 +1,73 @@
-import React, { useState, useEffect } from "react"
-import { useParams, useLocation } from "react-router-dom"
-import { formatNumber } from "../utils"
-import { Stack, Box, Typography } from "@mui/material"
 import { useTheme } from "@mui/material/styles"
-import Comments from "./Comments"
-import PostContent from "../Post/PostContent"
+import React from "react"
+import { useParams } from "react-router-dom"
 // import BasicList from "./FeaturedSubreddits"
-import Paper from "@mui/material/Paper"
-import PostTitleAndAutor from "./PostTitleAndAutor"
-import VerticalAlignTopOutlinedIcon from "@mui/icons-material/VerticalAlignTopOutlined"
+import { Box, Paper, Stack } from "@mui/material"
+import { useGetPostByIdQuery } from "../../api/apiSlice"
 import AboutSubreddit from "./AboutSubreddit"
+import Comments from "./Comments"
+import PostContent from "./PostContent"
 
-interface PostData {
-  id: string
-  title: string
-  author: string
-  created_utc: number
-  subreddit_name_prefixed: string
-  subreddit: string
-  subreddit_subscribers: number
-  score: number
-  num_comments: number
-  thumbnail: string
-  url: string
-  permalink: string
-  is_video: boolean
-  upvote_ratio: number
-  post_hint?: string
-  media: {
-    reddit_video: {
-      fallback_url: string
-    }
-  }
+// interface PostData {
+//   id: string
+//   title: string
+//   author: string
+//   created_utc: number
+//   subreddit_name_prefixed: string
+//   subreddit: string
+//   subreddit_subscribers: number
+//   score: number
+//   num_comments: number
+//   thumbnail: string
+//   url: string
+//   permalink: string
+//   is_video: boolean
+//   upvote_ratio: number
+//   post_hint?: string
+//   media: {
+//     reddit_video: {
+//       fallback_url: string
+//     }
+//   }
 
-  is_self: boolean
-  selftext: string
+//   is_self: boolean
+//   selftext: string
 
-  is_gallery: boolean
-  gallery_data: {
-    items: Array<{ media_id: string }>
-  }
-}
+//   is_gallery: boolean
+//   gallery_data: {
+//     items: Array<{ media_id: string }>
+//   }
+// }
 
-interface PostProps {
-  postData?: PostData // Optional post data object
-}
+// interface PostProps {
+//   postData?: PostData // Optional post data object
+// }
 
-const Post: React.FC<PostProps> = ({ postData }) => {
+const Post: React.FC = () => {
   const theme = useTheme()
-  const [post, setPost] = useState<PostData | null>(null)
-  const { id = "" } = useParams()
-  const location = useLocation()
+  // const [post, setPost] = useState<PostData | null>(null)
 
-  // Check if the current URL contains the word "comments"
-  const urlHasComments = location.pathname.includes("comments")
+  // const location = useLocation()
+  // const urlHasComments = location.pathname.includes("comments")
 
-  useEffect(() => {
-    const fetchPost = async () => {
-      if (postData) {
-        // If postData is provided, use it directly
-        setPost(postData)
-      } else {
-        // If postId is provided, fetch the post data
-        try {
-          const response = await fetch(
-            `https://www.reddit.com/api/info.json?id=t3_${id}`
-          )
-          const data = await response.json()
-          const firstChild = data?.data?.children?.[0]?.data
+  const { id = "" } = useParams<{
+    id?: string
+  }>()
 
-          if (firstChild) {
-            setPost(firstChild)
-          }
-        } catch (error) {
-          console.error("Error fetching post data:", error)
-        }
-      }
-    }
-
-    fetchPost()
-  }, [id, postData])
-
+  const { data } = useGetPostByIdQuery(id)
   const styles = {
     mainContaner: {
-      flexDirection: "row",
-      margin: { xs: "0rem", md: "0.5rem" },
+      flexDirection: { xs: "column", sm: "column", md: "row" },
       width: { xs: "100%", md: "90%" }
     },
 
     postContaner: {
       display: "flex",
       flexDirection: "column",
-      width: "100%"
+      width: "100%",
+      height: "100%",
+      marginBottom: "1rem",
+      alignItems: "center"
     },
 
     postTitleContaner: {
@@ -111,7 +87,6 @@ const Post: React.FC<PostProps> = ({ postData }) => {
     },
 
     subredditContaner: {
-      marginLeft: "1rem",
       display: { xs: "none", md: "block" }
     },
     ratingContaner: {
@@ -124,45 +99,20 @@ const Post: React.FC<PostProps> = ({ postData }) => {
     }
   }
 
-  if (!post) {
-    return <div>Loading...</div>
-  }
+  console.log("post", data?.data?.children?.[0]?.data.score)
+
+  const post = data?.data?.children?.[0]?.data
 
   return (
     <Stack alignItems="center">
       <Stack sx={styles.mainContaner}>
+        <Box marginRight={{ xs: "0rem", md: "1rem" }}>
+          <AboutSubreddit />
+        </Box>
         <Paper sx={styles.postContaner}>
-          <Box>
-            {urlHasComments ? (
-              <Stack sx={styles.postTitleContaner}>
-                <Stack sx={styles.ratingContaner}>
-                  <Stack
-                    alignItems="center"
-                    direction="row"
-                    justifyContent="center"
-                  >
-                    <strong>
-                      <VerticalAlignTopOutlinedIcon />
-                    </strong>
-                    <strong>{formatNumber(post.score)}</strong>
-                  </Stack>
-                  <Typography fontSize="0.8rem">
-                    {post.upvote_ratio}% ratio
-                  </Typography>
-                </Stack>
-                <PostTitleAndAutor />
-              </Stack>
-            ) : null}
-            <Stack alignItems="center">
-              <PostContent />
-            </Stack>
-          </Box>
-
+          <PostContent post={post} />
           <Comments />
         </Paper>
-        <Stack sx={styles.subredditContaner}>
-          <AboutSubreddit />
-        </Stack>
       </Stack>
     </Stack>
   )

@@ -3,11 +3,11 @@ import AutorenewOutlinedIcon from "@mui/icons-material/AutorenewOutlined"
 import LocalFireDepartmentOutlinedIcon from "@mui/icons-material/LocalFireDepartmentOutlined"
 import StarBorderIcon from "@mui/icons-material/StarBorder"
 import { Button } from "@mui/material"
+import Paper from "@mui/material/Paper"
 import Stack from "@mui/material/Stack"
+import { useTheme } from "@mui/material/styles"
 import { FC, ReactNode } from "react"
 import { NavLink } from "react-router-dom"
-import { useTheme } from "@mui/material/styles"
-import Paper from "@mui/material/Paper"
 
 /** @jsxImportSource @emotion/react */
 
@@ -35,9 +35,7 @@ const TopLink = ({ label, to, icon }: TopLinkProps) => {
           startIcon={icon}
           sx={{
             borderRadius: 10,
-            backgroundColor: isActive
-              ? theme.palette.secondary.main
-              : theme.palette.secondary.light,
+            backgroundColor: isActive ? "#a3b5c6" : "#d5ebfb",
             color: theme.palette.primary.main
           }}
           variant="outlined"
@@ -53,7 +51,8 @@ const Navigation: FC = () => {
   const styles = {
     navContainer: {
       p: { xs: "1rem", sm: "0.5rem", md: "1rem" },
-      width: { xs: "100%", md: "80%" }
+      width: { xs: "100%", md: "80%" },
+      marginBottom: { xs: "0rem", sm: "0.5rem", md: "1rem" }
     }
   }
 

@@ -2,8 +2,8 @@ import Box from "@mui/material/Box"
 import Stack from "@mui/material/Stack"
 import { FC } from "react"
 import { useLocation } from "react-router-dom"
-import Posts from "../Posts/Posts"
 import Navigation from "../Navigation/Navigation"
+import Posts from "../Posts/Posts"
 
 const Home: FC = () => {
   const location = useLocation()
@@ -16,19 +16,17 @@ const Home: FC = () => {
         display={{ xs: "none", sm: "flex", md: "flex" }}
       >
         <Navigation />
-      </Stack>
-      <Posts subreddit={pathName} />
 
-      <Stack
-        alignItems="center"
-        bottom="0"
-        display={{ xs: "block", sm: "none", md: "none" }}
-        position="fixed"
-        width="100%"
-      >
-        <Navigation />
+        <Stack width="80%">
+          <Posts subreddit={pathName} />
+        </Stack>
       </Stack>
-      <Box />
+      <Stack display={{ xs: "block", sm: "none", md: "none" }} width="100%">
+        <Posts subreddit={pathName} />
+        <Stack alignItems="center" bottom="0" position="fixed" width="100%">
+          <Navigation />
+        </Stack>
+      </Stack>
     </Box>
   )
 }

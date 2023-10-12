@@ -1,133 +1,126 @@
-import React, { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
-import Avatar from "@mui/material/Avatar"
-import Typography from "@mui/material/Typography"
-import { Stack, Box } from "@mui/material"
-import Paper from "@mui/material/Paper"
-import Divider from "@mui/material/Divider"
-import { formatNumber, formatTime } from "../utils"
+import { Avatar, Box, Divider, Paper, Stack, Typography } from "@mui/material"
+import React from "react"
+import { Link as RouterLink, useParams } from "react-router-dom"
+import { useGetSubredditQuery } from "../../api/apiSlice"
+import WithLoading from "../Utils/WithLoading"
+import { formatNumber, formatTime } from "../Utils/utils"
 import BasicList from "./FeaturedSubreddits"
 
 const AboutSubreddit: React.FC = () => {
-  const { subreddit } = useParams<{ subreddit: string }>()
-  const [subredditData, setSubredditData] = useState<any>(null)
+  const { subreddit = "" } = useParams<{
+    subreddit?: string
+  }>()
 
-  useEffect(() => {
-    const fetchSubreddit = async () => {
-      try {
-        const response = await fetch(
-          `https://www.reddit.com/r/${subreddit ?? ""}/about.json`
-        )
-        const data = await response.json()
-
-        console.log(data)
-
-        if (data?.data) {
-          setSubredditData(data.data)
-        }
-      } catch (error) {
-        console.error("Error fetching subreddit data:", error)
-      }
-    }
-
-    fetchSubreddit()
-  }, [subreddit])
+  const { data, error, isFetching, refetch } = useGetSubredditQuery(subreddit)
 
   const styles = {
     subredditContaner: {
-      marginLeft: "1rem",
       display: { xs: "none", md: "block" }
     }
   }
 
-  return (
-    <Stack sx={styles.subredditContaner}>
-      <Paper
-        elevation={3}
-        sx={{
-          width: "20rem",
-          maxWidth: 360,
-          marginBottom: "1rem"
-        }}
-      >
-        {subredditData ? (
-          <Stack direction="column">
-            <Box
-              style={{
-                backgroundColor: subredditData.banner_background_color,
-                padding: "1rem"
-              }}
-            >
-              <Typography variant="h6">About Community</Typography>
-            </Box>
+  const subredditData = data?.data
 
-            <Divider />
-            <Stack p="1rem">
-              <Stack
-                alignItems="center"
-                direction="row"
-                marginBottom="0.5rem"
-                //   p="0.5rem"
-                spacing="1rem"
+  return (
+    <WithLoading error={error} isFetching={isFetching} onRetry={refetch}>
+      <Stack>
+        <Paper
+          elevation={3}
+          sx={{
+            width: { xs: "100%", md: "20rem" },
+            marginBottom: "1rem"
+          }}
+        >
+          {subredditData ? (
+            <Stack direction="column">
+              <Box
+                style={{
+                  backgroundColor: subredditData.banner_background_color,
+                  padding: "1rem"
+                }}
               >
-                {subredditData.icon_img ? (
-                  <Avatar
-                    alt="avatar of subreddit"
-                    src={subredditData.icon_img}
-                    sx={{ width: 50, height: 50 }}
-                  />
-                ) : null}
-                <Typography>
-                  <strong>{subredditData.display_name_prefixed}</strong>
-                </Typography>
-              </Stack>
-              <Typography>{subredditData.public_description}</Typography>
-              <Typography fontSize="0.8rem" margin="0.5rem">
-                Created {formatTime(subredditData.created_utc)}
-              </Typography>
+                <Typography variant="h5">About Community</Typography>
+              </Box>
+
               <Divider />
-              <Stack
-                direction="row"
-                justifyContent="space-between"
-                marginTop="0.5rem"
-              >
+              <Stack p="1rem">
                 <Stack
                   alignItems="center"
-                  direction="column"
-                  justifyContent="center"
+                  direction="row"
+                  marginBottom="0.5rem"
+                  spacing="1rem"
                 >
-                  <Typography fontSize="0.8rem">Members</Typography>
-                  <strong>{formatNumber(subredditData.subscribers)}</strong>
-                </Stack>
-                <Stack alignItems="center" direction="column">
-                  <Typography fontSize="0.8rem">Online</Typography>
-                  <Stack direction="row">
-                    <Typography color="green" paddingRight="0.3rem">
-                      ●
+                  {subredditData.icon_img ? (
+                    <Avatar
+                      alt="avatar of subreddit"
+                      src={subredditData.icon_img}
+                      sx={{ width: 50, height: 50 }}
+                    />
+                  ) : null}
+
+                  <RouterLink
+                    style={{ textDecoration: "none", color: "inherit" }}
+                    to={`/r/${subreddit}/`}
+                  >
+                    <Typography>
+                      <strong>{subredditData.display_name_prefixed}</strong>
                     </Typography>
-                    <strong>
-                      {formatNumber(subredditData.accounts_active)}
-                    </strong>
+                  </RouterLink>
+                </Stack>
+                <Box height="auto" width="100%">
+                  <Typography style={{ overflowWrap: "break-word" }}>
+                    {subredditData.public_description}
+                  </Typography>
+                </Box>
+
+                <Typography fontSize="0.8rem" margin="0.5rem">
+                  Created {formatTime(subredditData.created_utc)}
+                </Typography>
+                <Divider />
+                <Stack
+                  direction="row"
+                  justifyContent="space-between"
+                  marginTop="0.5rem"
+                >
+                  <Stack
+                    alignItems="center"
+                    direction="column"
+                    justifyContent="center"
+                  >
+                    <Typography fontSize="0.8rem">Members</Typography>
+                    <strong>{formatNumber(subredditData.subscribers)}</strong>
+                  </Stack>
+                  <Stack alignItems="center" direction="column">
+                    <Typography fontSize="0.8rem">Online</Typography>
+                    <Stack direction="row">
+                      <Typography color="green" paddingRight="0.3rem">
+                        ●
+                      </Typography>
+                      <strong>
+                        {formatNumber(subredditData.accounts_active)}
+                      </strong>
+                    </Stack>
                   </Stack>
                 </Stack>
               </Stack>
             </Stack>
-          </Stack>
-        ) : (
-          <Typography>Loading subreddit data...</Typography>
-        )}
-      </Paper>
-      <Paper
-        elevation={3}
-        sx={{
-          width: "20rem",
-          maxWidth: 360,
-          marginBottom: "1rem"
-        }}
-      >
-        <BasicList />
-      </Paper>
-    </Stack>
+          ) : (
+            <Typography>Loading subreddit data...</Typography>
+          )}
+        </Paper>
+        <Box sx={styles.subredditContaner}>
+          <Paper
+            elevation={3}
+            sx={{
+              width: { xs: "100%", md: "20rem" },
+              marginBottom: "1rem"
+            }}
+          >
+            <BasicList />
+          </Paper>
+        </Box>
+      </Stack>
+    </WithLoading>
   )
 }
 

@@ -1,72 +1,43 @@
-import React, { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
-import { Stack, Typography, Box, CircularProgress } from "@mui/material"
-import { useTheme } from "@mui/material/styles"
 import SpeakerNotesOffOutlinedIcon from "@mui/icons-material/SpeakerNotesOffOutlined"
-import ShareButton from "../Posts/ShareButton"
 import VerticalAlignTopOutlinedIcon from "@mui/icons-material/VerticalAlignTopOutlined"
-import { formatNumber, formatTimeAgo } from "../utils"
-import Paper from "@mui/material/Paper"
+import { Box, IconButton, Stack, Typography } from "@mui/material"
 import Divider from "@mui/material/Divider"
+import { useTheme } from "@mui/material/styles"
+import { Link as RouterLink, useParams } from "react-router-dom"
+import { useGetCommentsQuery } from "../../api/apiSlice"
+import ShareButton from "../Posts/ShareButton"
+import WithLoading from "../Utils/WithLoading"
+import { formatNumber, formatTimeAgo } from "../Utils/utils"
 
 interface Comment {
-  id: string
-  body: string
-  author: string
-  permalink: string
-  score: number
-  created_utc: number
+  data: {
+    id: string
+    body: string
+    author: string
+    permalink: string
+    score: number
+    created_utc: number
+  }
 }
 
 const Comments: React.FC = () => {
   const theme = useTheme()
-  const [comments, setComments] = useState<Comment[]>([])
-  const { subreddit, id } = useParams()
-  const [isLoading, setIsLoading] = useState(true)
+  const { subreddit = "", id = "" } = useParams<{
+    subreddit?: string
+    id?: string
+  }>()
 
-  useEffect(() => {
-    const postURL = `https://www.reddit.com/r/${subreddit ?? ""}/comments/${
-      id ?? ""
-    }.json`
-
-    const fetchComments = async () => {
-      try {
-        setIsLoading(true)
-        const response = await fetch(postURL)
-        const data = await response.json()
-
-        console.log(data?.[1]?.data)
-        const commentsData =
-          data?.[1]?.data?.children?.map((child: any) => child.data) || []
-
-        setComments(commentsData)
-
-        setIsLoading(false)
-      } catch (error) {
-        console.error("Error fetching Reddit comments:", error)
-        setIsLoading(false)
-      }
-    }
-
-    fetchComments()
-  }, [id, subreddit])
+  const { data, error, isFetching, refetch } = useGetCommentsQuery({
+    subreddit,
+    id
+  })
 
   const styles = {
-    loadingContainer: {
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      width: "100%",
-      height: "100vh", // Set the height to 100% of the viewport height
-      marginRight: { xs: "0rem", md: "1rem" },
-      marginTop: "1rem"
-    },
-
     noCommentsContainer: {
       display: "flex",
       justifyContent: "center",
       paddingTop: "2.5rem",
-      minHeight: "5rem",
+      paddingBottom: "4rem",
       width: "100%",
       height: "100%"
     },
@@ -74,7 +45,6 @@ const Comments: React.FC = () => {
     mainContaner: {
       height: "100%",
       width: "100%"
-      // backgroundColor: theme.palette.secondary.main
     },
 
     timeAgoTypography: {
@@ -104,51 +74,73 @@ const Comments: React.FC = () => {
   }
 
   return (
-    <Stack direction="row" height="100%">
-      {isLoading ? (
-        // Display loading indicator when isLoading is true
-        <Paper elevation={3} sx={styles.loadingContainer}>
-          <CircularProgress /> {/* Loading indicator */}
-        </Paper>
-      ) : (
-        // Display comments when isLoading is false
-        <Paper elevation={3} sx={styles.mainContaner}>
-          <Typography margin="1rem" variant="h6">
-            Comments
-          </Typography>
-
-          {comments.length === 0 ? (
-            <Box sx={styles.noCommentsContainer}>
-              <SpeakerNotesOffOutlinedIcon />
-              <Typography> No Comments Yet</Typography>
+    <WithLoading error={error} isFetching={isFetching} onRetry={refetch}>
+      <Stack alignItems="center" width="100%">
+        <Box
+          sx={{
+            justifyContent: "center",
+            alignItems: "center",
+            width: "100%"
+          }}
+        >
+          <Box sx={styles.mainContaner}>
+            <Divider />
+            <Box
+              marginLeft={{ xs: "1rem", md: "2rem" }}
+              paddingTop={{ xs: "1rem", md: "1.5rem" }}
+            >
+              <Typography variant="h6">Comments</Typography>
             </Box>
-          ) : (
-            comments.map((comment) => (
-              <Box key={comment.id} sx={styles.commentContaner}>
-                <Stack sx={styles.commentTopAndBottomContaner}>
-                  <Typography>
-                    <strong>{comment.author}</strong>
-                  </Typography>
-                  <Typography sx={styles.timeAgoTypography}>
-                    {formatTimeAgo(comment.created_utc)}
-                  </Typography>
-                </Stack>
-                <Typography padding="0.5rem">{comment.body}</Typography>
-                <Divider />
-                <Stack sx={styles.commentTopAndBottomContaner}>
-                  <VerticalAlignTopOutlinedIcon />
-                  {formatNumber(comment.score)}
-                  <Typography>
-                    {comment.score === 1 ? "Upvote" : "Upvotes"}
-                  </Typography>
-                  <ShareButton link={comment.permalink} />
-                </Stack>
+
+            {data?.[1]?.data?.children?.length === 0 ? (
+              <Box sx={styles.noCommentsContainer}>
+                <SpeakerNotesOffOutlinedIcon />
+                <Typography> No Comments Yet</Typography>
               </Box>
-            ))
-          )}
-        </Paper>
-      )}
-    </Stack>
+            ) : (
+              data?.[1]?.data?.children?.map((comment: Comment) => (
+                <Box key={comment.data.id} sx={styles.commentContaner}>
+                  <Stack sx={styles.commentTopAndBottomContaner}>
+                    <RouterLink
+                      style={{ textDecoration: "none", color: "inherit" }}
+                      to={`/user/${comment.data.author}`}
+                    >
+                      <Typography>
+                        <strong>{comment.data.author}</strong>
+                      </Typography>
+                    </RouterLink>
+
+                    <Typography sx={styles.timeAgoTypography}>
+                      {formatTimeAgo(comment.data.created_utc)}
+                    </Typography>
+                  </Stack>
+                  <Typography padding="0.5rem">{comment.data.body}</Typography>
+                  <Divider />
+                  <Stack sx={styles.commentTopAndBottomContaner}>
+                    <IconButton
+                      size="small"
+                      sx={{
+                        borderRadius: "4px",
+                        marginRight: "1rem",
+                        color: theme.palette.primary.main
+                      }}
+                    >
+                      <VerticalAlignTopOutlinedIcon />
+                      <Typography fontSize="0.9rem" marginLeft="0.3rem">
+                        {formatNumber(comment.data.score)}
+                        {comment.data.score === 1 ? " Upvote" : " Upvotes"}
+                      </Typography>
+                    </IconButton>
+
+                    <ShareButton link={comment.data.permalink} />
+                  </Stack>
+                </Box>
+              ))
+            )}
+          </Box>
+        </Box>
+      </Stack>
+    </WithLoading>
   )
 }
 

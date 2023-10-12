@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react"
-import { useParams } from "react-router-dom"
-import Gallery from "./Gallery"
+import { Box, Stack, Typography } from "@mui/material"
 import CardMedia from "@mui/material/CardMedia"
 import Link from "@mui/material/Link"
-import { extractPartUrl } from "../utils"
-import { Stack, Typography, Box } from "@mui/material"
 import { useTheme } from "@mui/material/styles"
+import React from "react"
+import { Link as RouterLink } from "react-router-dom"
+import { extractPartUrl, formatTimeAgo } from "../Utils/utils"
+import Gallery from "./Gallery"
 
 interface PostData {
   id: string
@@ -39,39 +39,12 @@ interface PostData {
 }
 
 interface PostProps {
-  postData?: PostData // Optional post data object
+  post: PostData
 }
 
-const PostContent: React.FC<PostProps> = ({ postData }) => {
+const PostContent: React.FC<PostProps> = ({ post }) => {
   const theme = useTheme()
-  const [post, setPost] = useState<PostData | null>(null)
-  const { id = "" } = useParams()
 
-  useEffect(() => {
-    const fetchPost = async () => {
-      if (postData) {
-        // If postData is provided, use it directly
-        setPost(postData)
-      } else {
-        // If postId is provided, fetch the post data
-        try {
-          const response = await fetch(
-            `https://www.reddit.com/api/info.json?id=t3_${id}`
-          )
-          const data = await response.json()
-          const firstChild = data?.data?.children?.[0]?.data
-
-          if (firstChild) {
-            setPost(firstChild)
-          }
-        } catch (error) {
-          console.error("Error fetching post data:", error)
-        }
-      }
-    }
-
-    fetchPost()
-  }, [id, postData])
   const styles = {
     postContaner: {
       display: "flex",
@@ -108,12 +81,40 @@ const PostContent: React.FC<PostProps> = ({ postData }) => {
     textContaner: {
       fontSize: { xs: "0.8rem", md: "1rem" },
       padding: { xs: "0.2rem" },
-      // maxHeight: { xs: "0.5rem", md: "1rem" },
       marginLeft: { xs: "0.5rem", md: "1rem" },
       marginRight: { xs: "0.5rem", md: "1rem" },
       marginBottom: { xs: "0.5rem", md: "1rem" },
       overflowY: "auto",
       overflow: "auto"
+    },
+
+    autorAndSubreddit: {
+      alignItems: { md: "center" },
+      flexDirection: { xs: "column", md: "row" },
+      spacing: "1",
+      width: "100%"
+    },
+
+    titlePostTypography: {
+      color: theme.palette.primary.main,
+      textDecoration: "none",
+      marginBottom: { xs: theme.spacing(1), md: theme.spacing(2) },
+      marginTop: { xs: theme.spacing(0.2), md: theme.spacing(1) },
+      width: "100%",
+      fontSize: { xs: "1rem", md: "1.5rem" }
+    },
+
+    typography: {
+      display: { xs: "none", md: "block" },
+      color: theme.palette.primary.main,
+      fontSize: { xs: "0.7rem", md: "0.9rem" },
+      paddingRight: { xs: "0.5rem" }
+    },
+
+    subredditAndAuthorTypography: {
+      color: theme.palette.primary.main,
+      fontSize: { xs: "0.8rem", md: "1rem" },
+      paddingRight: { xs: "0.5rem" }
     }
   }
 
@@ -122,7 +123,47 @@ const PostContent: React.FC<PostProps> = ({ postData }) => {
   }
 
   return (
-    <Stack direction="row" width="100%">
+    <Stack direction="column" margin="0px" width="100%">
+      <Stack
+        marginLeft={{ xs: "1rem", md: "2rem" }}
+        marginTop={{ xs: "1rem", md: "1.5rem" }}
+      >
+        <Stack sx={styles.autorAndSubreddit}>
+          <Stack alignItems="center" direction="row">
+            <RouterLink
+              style={{ textDecoration: "none", color: "inherit" }}
+              to={`/r/${post.subreddit}`}
+            >
+              <Box sx={styles.subredditAndAuthorTypography}>
+                <strong>{post.subreddit_name_prefixed}</strong>
+              </Box>
+            </RouterLink>
+
+            <Typography sx={styles.typography}>Posted by</Typography>
+
+            <RouterLink
+              style={{ textDecoration: "none", color: "inherit" }}
+              to={`/user/${post.author}`}
+            >
+              <Typography sx={styles.subredditAndAuthorTypography}>
+                {post.author}
+              </Typography>
+            </RouterLink>
+            <Typography sx={styles.typography}>
+              {formatTimeAgo(post.created_utc)}
+            </Typography>
+          </Stack>
+        </Stack>
+        {/* POST TITLE */}
+        <RouterLink
+          style={{ textDecoration: "none" }}
+          to={`/r/${post.subreddit}/comments/${post.id}`}
+        >
+          <Typography sx={styles.titlePostTypography}>
+            <strong>{post.title}</strong>
+          </Typography>
+        </RouterLink>
+      </Stack>
       {/* <Box sx={styles.postContaner}> */}
       {/* VIDEO */}
       {post.is_video && (
@@ -174,13 +215,13 @@ const PostContent: React.FC<PostProps> = ({ postData }) => {
           <Typography sx={styles.textContaner}>{post.selftext}</Typography>
         </Stack>
       )}
-      {/* </Box> */}
       {/* LINK */}
       {post.post_hint === "link" && (
         <Stack
-          flexDirection={{ xs: "column", md: "row" }}
+          flexDirection={{ xs: "column", sm: "row", md: "row" }}
           justifyContent="space-between"
-          m="1rem"
+          paddingBottom="1rem"
+          paddingLeft="2rem"
           width="100%"
         >
           <Link

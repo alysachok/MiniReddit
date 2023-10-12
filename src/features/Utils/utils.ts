@@ -1,3 +1,6 @@
+import { SerializedError } from "@reduxjs/toolkit"
+import { FetchBaseQueryError } from "@reduxjs/toolkit/dist/query"
+
 interface Post {
   id: number
   title: string
@@ -118,3 +121,25 @@ export const formatNumber = (value: number | undefined): string => {
 }
 
 export default posts
+
+export const parseErrorMessage = (
+  error: FetchBaseQueryError | SerializedError | undefined
+) => {
+  let errorMessage = ""
+
+  if (error) {
+    const fetchBaseQueryError = error as FetchBaseQueryError
+
+    if (fetchBaseQueryError.status) {
+      if (typeof fetchBaseQueryError.status === "number") {
+        errorMessage = "Unknown Error"
+      } else {
+        errorMessage = fetchBaseQueryError.error
+      }
+    } else {
+      errorMessage = (error as SerializedError).message ?? "Serialized Error"
+    }
+  }
+
+  return errorMessage
+}

@@ -1,7 +1,7 @@
-import React from "react"
-import { IconButton, Tooltip, Typography } from "@mui/material"
 import ShareOutlinedIcon from "@mui/icons-material/ShareOutlined"
+import { IconButton, Tooltip, Typography } from "@mui/material"
 import { useTheme } from "@mui/material/styles"
+import React from "react"
 
 interface ShareButtonProps {
   link: string
@@ -25,11 +25,14 @@ const ShareButton: React.FC<ShareButtonProps> = ({ link }) => {
         size="small"
         sx={{
           borderRadius: "4px",
+          marginLeft: "0.4rem",
           color: theme.palette.primary.main
         }}
       >
         <ShareOutlinedIcon />
-        <Typography>Share</Typography>
+        <Typography fontSize="0.9rem" marginLeft="0.4rem">
+          Share
+        </Typography>
       </IconButton>
     </Tooltip>
   )
