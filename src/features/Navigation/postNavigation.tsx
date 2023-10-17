@@ -1,9 +1,9 @@
 import { css } from "@emotion/react"
 import { Button, Typography } from "@mui/material"
 import Stack from "@mui/material/Stack"
+// import { useTheme } from "@mui/material/styles"
 import { FC } from "react"
 import { NavLink, useParams } from "react-router-dom"
-import { useTheme } from "@mui/material/styles"
 
 /** @jsxImportSource @emotion/react */
 
@@ -19,7 +19,7 @@ interface PostLinkProps {
 }
 
 const TopLink = ({ label, to }: PostLinkProps) => {
-  const theme = useTheme()
+  // const theme = useTheme()
   const styles = getStyles()
 
   return (
@@ -28,11 +28,11 @@ const TopLink = ({ label, to }: PostLinkProps) => {
         <Button
           size="small"
           sx={{
-            borderRadius: 10,
-            backgroundColor: isActive
-              ? theme.palette.secondary.main
-              : theme.palette.secondary.light,
-            color: theme.palette.primary.main
+            borderRadius: 10
+            // backgroundColor: isActive
+            //   ? theme.palette.background.default
+            //   : theme.palette.background.default,
+            // color: theme.palette.primary.main
           }}
           variant="outlined"
         >

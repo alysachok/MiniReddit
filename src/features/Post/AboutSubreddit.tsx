@@ -7,6 +7,7 @@ import { formatNumber, formatTime } from "../Utils/utils"
 import BasicList from "./FeaturedSubreddits"
 
 const AboutSubreddit: React.FC = () => {
+  // const theme = useTheme()
   const { subreddit = "" } = useParams<{
     subreddit?: string
   }>()
@@ -35,7 +36,6 @@ const AboutSubreddit: React.FC = () => {
             <Stack direction="column">
               <Box
                 style={{
-                  backgroundColor: subredditData.banner_background_color,
                   padding: "1rem"
                 }}
               >

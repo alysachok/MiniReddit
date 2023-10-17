@@ -164,7 +164,7 @@ const AuthorPage: React.FC = () => {
                                 sx={{
                                   borderRadius: "4px",
                                   marginLeft: "0.4rem",
-                                  color: theme.palette.primary.main
+                                  color: theme.palette.primary.light
                                 }}
                               >
                                 <ModeCommentOutlinedIcon />

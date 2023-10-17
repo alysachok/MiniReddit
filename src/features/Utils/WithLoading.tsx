@@ -27,7 +27,7 @@ const WithLoading: FC<PropsWithChildren<WithLoadingProps>> = ({
         justifyContent="center" // Center horizontally
         left="0"
         padding="0px"
-        position="fixed"
+        // position="absolute"
         top="0"
         width="100vw" // 100% of the viewport width
       >
@@ -41,7 +41,16 @@ const WithLoading: FC<PropsWithChildren<WithLoadingProps>> = ({
 
   if (error) {
     return (
-      <Stack>
+      <Stack
+        alignItems="center"
+        height="100vh" // 100% of the viewport height
+        justifyContent="center" // Center horizontally
+        left="0"
+        padding="0px"
+        position="fixed"
+        top="0"
+        width="100vw"
+      >
         <p>Error: {errorMessage}</p>
         <Button onClick={onRetry}>Retry</Button>
       </Stack>

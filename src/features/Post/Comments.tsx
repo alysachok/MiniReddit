@@ -63,13 +63,19 @@ const Comments: React.FC = () => {
     },
 
     commentContaner: {
-      backgroundColor: theme.palette.secondary.light,
+      backgroundColor: theme.palette.background.default,
       margin: { xs: "0.5rem", md: "0.8rem" },
       paddingLeft: { xs: "1rem", md: "1.5rem" },
 
       "&:hover": {
         boxShadow: "1px 2px 2px gray"
       }
+    },
+
+    commentBody: {
+      padding: "0.5rem",
+      overflowWrap: "break-word",
+      fontSize: { xs: "0.8rem", md: "0.9rem" }
     }
   }
 
@@ -89,13 +95,18 @@ const Comments: React.FC = () => {
               marginLeft={{ xs: "1rem", md: "2rem" }}
               paddingTop={{ xs: "1rem", md: "1.5rem" }}
             >
-              <Typography variant="h6">Comments</Typography>
+              <Typography sx={{ fontSize: { xs: "1rem", md: "1.2rem" } }}>
+                Comments
+              </Typography>
             </Box>
 
             {data?.[1]?.data?.children?.length === 0 ? (
               <Box sx={styles.noCommentsContainer}>
                 <SpeakerNotesOffOutlinedIcon />
-                <Typography> No Comments Yet</Typography>
+                <Typography sx={{ fontSize: { xs: "1rem", md: "1.2rem" } }}>
+                  {" "}
+                  No Comments Yet
+                </Typography>
               </Box>
             ) : (
               data?.[1]?.data?.children?.map((comment: Comment) => (
@@ -114,15 +125,17 @@ const Comments: React.FC = () => {
                       {formatTimeAgo(comment.data.created_utc)}
                     </Typography>
                   </Stack>
-                  <Typography padding="0.5rem">{comment.data.body}</Typography>
-                  <Divider />
+
+                  <Typography sx={styles.commentBody}>
+                    {comment.data.body}
+                  </Typography>
                   <Stack sx={styles.commentTopAndBottomContaner}>
                     <IconButton
                       size="small"
                       sx={{
                         borderRadius: "4px",
                         marginRight: "1rem",
-                        color: theme.palette.primary.main
+                        color: theme.palette.primary.light
                       }}
                     >
                       <VerticalAlignTopOutlinedIcon />
@@ -134,6 +147,7 @@ const Comments: React.FC = () => {
 
                     <ShareButton link={comment.data.permalink} />
                   </Stack>
+                  <Divider />
                 </Box>
               ))
             )}

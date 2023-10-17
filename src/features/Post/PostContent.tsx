@@ -81,11 +81,12 @@ const PostContent: React.FC<PostProps> = ({ post }) => {
     textContaner: {
       fontSize: { xs: "0.8rem", md: "1rem" },
       padding: { xs: "0.2rem" },
-      marginLeft: { xs: "0.5rem", md: "1rem" },
+      marginLeft: { xs: "0.5rem", md: "1.5rem" },
       marginRight: { xs: "0.5rem", md: "1rem" },
       marginBottom: { xs: "0.5rem", md: "1rem" },
       overflowY: "auto",
-      overflow: "auto"
+      overflow: "auto",
+      overflowWrap: "break-word"
     },
 
     autorAndSubreddit: {
@@ -97,6 +98,8 @@ const PostContent: React.FC<PostProps> = ({ post }) => {
 
     titlePostTypography: {
       color: theme.palette.primary.main,
+      overflow: "auto",
+      overflowWrap: "break-word",
       textDecoration: "none",
       marginBottom: { xs: theme.spacing(1), md: theme.spacing(2) },
       marginTop: { xs: theme.spacing(0.2), md: theme.spacing(1) },
@@ -106,7 +109,7 @@ const PostContent: React.FC<PostProps> = ({ post }) => {
 
     typography: {
       display: { xs: "none", md: "block" },
-      color: theme.palette.primary.main,
+      color: theme.palette.primary.light,
       fontSize: { xs: "0.7rem", md: "0.9rem" },
       paddingRight: { xs: "0.5rem" }
     },
@@ -164,7 +167,6 @@ const PostContent: React.FC<PostProps> = ({ post }) => {
           </Typography>
         </RouterLink>
       </Stack>
-      {/* <Box sx={styles.postContaner}> */}
       {/* VIDEO */}
       {post.is_video && (
         <Box sx={styles.postContaner}>

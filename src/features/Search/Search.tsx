@@ -16,7 +16,7 @@ const getStyles = (theme: Theme) => ({
     "& .MuiOutlinedInput-root": {
       "&.Mui-focused fieldset": {
         // - Set the Input border when parent is focused
-        borderColor: "grey"
+        borderColor: theme.palette.primary.light
       }
     }
   })

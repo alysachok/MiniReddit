@@ -9,7 +9,7 @@ import WithLoading from "../Utils/WithLoading"
 
 const Subreddit: React.FC = () => {
   const { subreddit = "" } = useParams<{ subreddit?: string }>()
-
+  // const theme = useTheme()
   const { data, error, isFetching, refetch } = useGetSubredditQuery(subreddit)
 
   const styles = {
@@ -32,8 +32,6 @@ const Subreddit: React.FC = () => {
     }
   }
 
-  console.log(data?.data)
-
   const dataInfo = data?.data
 
   return (
@@ -44,9 +42,9 @@ const Subreddit: React.FC = () => {
             <Box
               sx={{
                 display: "flex",
-                backgroundColor: dataInfo.banner_background_color,
+                // backgroundColor: theme.palette.background.default,
                 alignItems: "center",
-                direction: "column",
+                flexDirection: "column",
                 justifyContent: "center",
                 padding: "5rem"
               }}

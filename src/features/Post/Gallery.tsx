@@ -1,8 +1,8 @@
-import React, { useState } from "react"
-import { Box } from "@mui/material"
 import NavigateBeforeRoundedIcon from "@mui/icons-material/NavigateBeforeRounded"
 import NavigateNextRoundedIcon from "@mui/icons-material/NavigateNextRounded"
+import { Box } from "@mui/material"
 import { useTheme } from "@mui/material/styles"
+import React, { useState } from "react"
 
 interface Photo {
   id: string
@@ -38,7 +38,7 @@ const Gallery: React.FC<GalleryProps> = ({ photos }) => {
     alignItems: "center",
     height: { xs: theme.spacing(50), md: theme.spacing(100) },
     width: "100%",
-    backgroundColor: "white",
+    backgroundColor: theme.palette.background.default,
     overflow: "hidden"
   }
 
@@ -62,8 +62,6 @@ const Gallery: React.FC<GalleryProps> = ({ photos }) => {
   }
 
   const navigationButtonStyle = {
-    backgroundColor: theme.palette.primary.light,
-    color: theme.palette.secondary.main,
     borderRadius: "50%",
     border: "none",
     cursor: "pointer",
@@ -72,8 +70,6 @@ const Gallery: React.FC<GalleryProps> = ({ photos }) => {
   }
 
   const counterStyle = {
-    backgroundColor: theme.palette.primary.light,
-    color: theme.palette.secondary.main,
     fontSize: { xs: "0.5rem", sm: "1rem", md: "1.5rem" },
     padding: { xs: "0.3rem", sm: "0.3rem", md: "0.7rem" },
     borderRadius: "25%"

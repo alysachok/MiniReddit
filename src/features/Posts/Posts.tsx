@@ -61,18 +61,19 @@ const Posts: FC<PostsProps> = ({ subreddit }) => {
   const styles = {
     mainContaner: {
       height: "auto",
+      width: "100%",
       "&:hover": {
         boxShadow: "3px 3px 3px gray"
       }
     },
 
-    voteWrapper: {
+    postWrapper: {
       display: "flex",
       height: "100%",
       justifyContent: "center",
       alignItems: "center",
       "&:hover": {
-        boxShadow: " 1px 2px 2px gray"
+        boxShadow: "0.5px 2px 2px gray"
       },
       marginBottom: { xs: theme.spacing(1), md: theme.spacing(2.5) }
     },
@@ -89,7 +90,6 @@ const Posts: FC<PostsProps> = ({ subreddit }) => {
 
     postContaner: {
       display: "flex",
-      borderLeft: "1px solid lightgray",
       alignItems: "center",
       paddingRight: { xs: "0.2rem", md: "0.5rem" },
       overflowY: "hidden",
@@ -119,10 +119,11 @@ const Posts: FC<PostsProps> = ({ subreddit }) => {
         >
           {data?.data?.children?.map((post: PostData) => (
             <Paper elevation={3} key={post.data.id} sx={styles.mainContaner}>
-              <Box sx={styles.voteWrapper}>
+              <Box sx={styles.postWrapper}>
                 <Box sx={styles.vote}>
                   <strong>{formatNumber(post.data.score)}</strong>
                 </Box>
+                <Divider flexItem orientation="vertical" />
                 <Box sx={styles.postContaner}>
                   <Stack width="100%">
                     <Stack alignItems="center">
@@ -140,7 +141,7 @@ const Posts: FC<PostsProps> = ({ subreddit }) => {
                             sx={{
                               borderRadius: "4px",
                               marginLeft: "0.4rem",
-                              color: theme.palette.primary.main
+                              color: theme.palette.primary.light
                             }}
                           >
                             <ModeCommentOutlinedIcon />

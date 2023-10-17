@@ -1,5 +1,5 @@
-import { styled } from "@mui/material/styles"
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar"
+import { styled } from "@mui/material/styles"
 
 const drawerWidth = 240
 
@@ -29,14 +29,14 @@ interface AppBarProps extends MuiAppBarProps {
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open"
 })<AppBarProps>(({ theme, open }) => ({
-  backgroundColor: "white",
+  backgroundColor: theme.palette.background.default,
   transition: theme.transitions.create(["margin", "width"], {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen
   }),
   ...(open && {
     width: `calc(100% - ${drawerWidth}px)`,
-    backgroundColor: "white",
+    backgroundColor: theme.palette.background.default,
     transition: theme.transitions.create(["margin", "width"], {
       easing: theme.transitions.easing.easeOut,
       duration: theme.transitions.duration.enteringScreen
@@ -54,4 +54,4 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   justifyContent: "flex-start"
 }))
 
-export { Main, AppBar, DrawerHeader }
+export { AppBar, DrawerHeader, Main }

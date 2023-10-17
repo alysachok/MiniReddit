@@ -1,14 +1,6 @@
 import CakeOutlinedIcon from "@mui/icons-material/CakeOutlined"
 import StarBorderOutlinedIcon from "@mui/icons-material/StarBorderOutlined"
-import {
-  Avatar,
-  Box,
-  Divider,
-  Paper,
-  Stack,
-  Typography,
-  useTheme
-} from "@mui/material"
+import { Avatar, Box, Divider, Paper, Stack, Typography } from "@mui/material"
 import React from "react"
 import { useParams } from "react-router-dom"
 import { useGetAuthorInfoQuery } from "../../api/apiSlice"
@@ -17,7 +9,6 @@ import WithLoading from "../Utils/WithLoading"
 import { formatNumber, formatTime } from "../Utils/utils"
 
 const AboutSubreddit: React.FC = () => {
-  const theme = useTheme()
   const { author = "" } = useParams<{ author?: string }>()
 
   const { data, error, isFetching, refetch } = useGetAuthorInfoQuery(author)
@@ -27,8 +18,6 @@ const AboutSubreddit: React.FC = () => {
       marginLeft: { xs: "0rem", md: "1rem" }
     }
   }
-
-  console.log(data?.data)
 
   const authorData = data?.data
 
@@ -46,7 +35,6 @@ const AboutSubreddit: React.FC = () => {
             <Stack direction="column">
               <Box
                 style={{
-                  backgroundColor: theme.palette.primary.light,
                   padding: "1rem"
                 }}
               >

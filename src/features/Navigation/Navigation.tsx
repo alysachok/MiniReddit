@@ -35,8 +35,12 @@ const TopLink = ({ label, to, icon }: TopLinkProps) => {
           startIcon={icon}
           sx={{
             borderRadius: 10,
-            backgroundColor: isActive ? "#a3b5c6" : "#d5ebfb",
-            color: theme.palette.primary.main
+            backgroundColor: isActive
+              ? theme.palette.primary.light
+              : theme.palette.background.default,
+            color: isActive
+              ? theme.palette.primary.main
+              : theme.palette.primary.light
           }}
           variant="outlined"
         >
