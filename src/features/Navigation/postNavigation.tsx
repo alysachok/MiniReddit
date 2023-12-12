@@ -19,7 +19,6 @@ interface PostLinkProps {
 }
 
 const TopLink = ({ label, to }: PostLinkProps) => {
-  // const theme = useTheme()
   const styles = getStyles()
 
   return (
@@ -29,10 +28,6 @@ const TopLink = ({ label, to }: PostLinkProps) => {
           size="small"
           sx={{
             borderRadius: 10
-            // backgroundColor: isActive
-            //   ? theme.palette.background.default
-            //   : theme.palette.background.default,
-            // color: theme.palette.primary.main
           }}
           variant="outlined"
         >

@@ -69,24 +69,28 @@ const PostContent: React.FC<PostProps> = ({ post }) => {
     image: {
       maxHeight: "100%",
       overflow: "auto",
-      objectFit: "scale-down"
+      objectFit: "scale-down",
+      maxWidth: "100%"
     },
 
     media: {
       height: theme.spacing(100),
       width: "100%",
-      overflow: "auto"
+      overflow: "auto",
+      maxWidth: "100%",
+      maxHeight: "100%"
     },
 
     textContaner: {
       fontSize: { xs: "0.8rem", md: "1rem" },
-      padding: { xs: "0.2rem" },
-      marginLeft: { xs: "0.5rem", md: "1.5rem" },
-      marginRight: { xs: "0.5rem", md: "1rem" },
-      marginBottom: { xs: "0.5rem", md: "1rem" },
+      paddingLeft: { xs: theme.spacing(1), md: theme.spacing(2) },
+      paddingRight: { xs: theme.spacing(1), md: theme.spacing(2) },
+      paddingBottom: { xs: theme.spacing(1), md: theme.spacing(2) },
       overflowY: "auto",
       overflow: "auto",
-      overflowWrap: "break-word"
+      overflowWrap: "break-word",
+      maxWidth: "100%",
+      maxHeight: "100%"
     },
 
     autorAndSubreddit: {
@@ -128,8 +132,9 @@ const PostContent: React.FC<PostProps> = ({ post }) => {
   return (
     <Stack direction="column" margin="0px" width="100%">
       <Stack
-        marginLeft={{ xs: "1rem", md: "2rem" }}
-        marginTop={{ xs: "1rem", md: "1.5rem" }}
+        paddingLeft={{ xs: theme.spacing(1), md: theme.spacing(2) }}
+        paddingRight={{ xs: theme.spacing(1), md: theme.spacing(2) }}
+        paddingTop={{ xs: theme.spacing(1), md: theme.spacing(2) }}
       >
         <Stack sx={styles.autorAndSubreddit}>
           <Stack alignItems="center" direction="row">
@@ -185,7 +190,7 @@ const PostContent: React.FC<PostProps> = ({ post }) => {
       {post.post_hint === "image" && (
         <Box sx={styles.postContaner}>
           <CardMedia
-            alt="Reddit Post Image"
+            alt={post.title}
             component="img"
             src={post.url}
             sx={styles.image}
@@ -242,7 +247,7 @@ const PostContent: React.FC<PostProps> = ({ post }) => {
               width={{ xs: "100%", sm: "50%" }}
             >
               <CardMedia
-                alt="Thumbnail"
+                alt={post.title}
                 component="img"
                 src={post.thumbnail}
                 sx={{

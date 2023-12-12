@@ -36,11 +36,11 @@ const TopLink = ({ label, to, icon }: TopLinkProps) => {
           sx={{
             borderRadius: 10,
             backgroundColor: isActive
-              ? theme.palette.primary.light
-              : theme.palette.background.default,
+              ? theme.palette.background.default
+              : theme.palette.background.paper,
             color: isActive
-              ? theme.palette.primary.main
-              : theme.palette.primary.light
+              ? theme.palette.secondary.main
+              : theme.palette.primary.main
           }}
           variant="outlined"
         >
@@ -54,8 +54,8 @@ const TopLink = ({ label, to, icon }: TopLinkProps) => {
 const Navigation: FC = () => {
   const styles = {
     navContainer: {
-      p: { xs: "1rem", sm: "0.5rem", md: "1rem" },
-      width: { xs: "100%", md: "80%" },
+      p: { xs: "0.5rem", sm: "0.8rem", md: "1rem" },
+      width: { xs: "100%", sm: "100%", md: "80%" },
       marginBottom: { xs: "0rem", sm: "0.5rem", md: "1rem" }
     }
   }

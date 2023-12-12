@@ -30,7 +30,10 @@ const ShareButton: React.FC<ShareButtonProps> = ({ link }) => {
         }}
       >
         <ShareOutlinedIcon />
-        <Typography fontSize="0.9rem" marginLeft="0.4rem">
+        <Typography
+          fontSize={{ xs: "0.8rem", md: "0.9rem" }}
+          marginLeft="0.4rem"
+        >
           Share
         </Typography>
       </IconButton>

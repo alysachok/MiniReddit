@@ -7,7 +7,7 @@ import Posts from "../Posts/Posts"
 
 const Home: FC = () => {
   const location = useLocation()
-  const pathName = location.pathname.slice(1)
+  const subreddit = location.pathname.slice(1)
 
   return (
     <Box>
@@ -16,14 +16,30 @@ const Home: FC = () => {
         display={{ xs: "none", sm: "flex", md: "flex" }}
       >
         <Navigation />
-
-        <Stack width="80%">
-          <Posts subreddit={pathName} />
+        <Stack width={{ sm: "100%", md: "80%" }}>
+          <Posts subreddit={subreddit} />
         </Stack>
       </Stack>
       <Stack display={{ xs: "block", sm: "none", md: "none" }} width="100%">
-        <Posts subreddit={pathName} />
-        <Stack alignItems="center" bottom="0" position="fixed" width="100%">
+        <Stack
+          height="auto"
+          overflow="auto"
+          paddingBottom="3rem"
+          paddingLeft={{ xs: "0.5rem" }}
+          paddingRight={{ xs: "0.5rem" }}
+          paddingTop={{ xs: "0.5rem" }}
+          width="100%"
+        >
+          <Posts subreddit={subreddit} />
+        </Stack>
+
+        <Stack
+          alignItems="center"
+          bottom="0"
+          position="fixed"
+          width="100%"
+          zIndex="tooltip"
+        >
           <Navigation />
         </Stack>
       </Stack>

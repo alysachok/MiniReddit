@@ -24,12 +24,11 @@ const WithLoading: FC<PropsWithChildren<WithLoadingProps>> = ({
         alignItems="center" // Center vertically
         display="flex"
         height="100vh" // 100% of the viewport height
-        justifyContent="center" // Center horizontally
+        justifyContent="center"
         left="0"
         padding="0px"
-        // position="absolute"
         top="0"
-        width="100vw" // 100% of the viewport width
+        width="100%"
       >
         <Stack alignItems="center" direction="row" spacing={1}>
           <CircularProgress size="1rem" />

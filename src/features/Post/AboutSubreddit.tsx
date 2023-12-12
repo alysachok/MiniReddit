@@ -29,7 +29,7 @@ const AboutSubreddit: React.FC = () => {
           elevation={3}
           sx={{
             width: { xs: "100%", md: "20rem" },
-            marginBottom: "1rem"
+            marginBottom: { xs: "0rem", sm: "0.5rem", md: "1rem" }
           }}
         >
           {subredditData ? (
@@ -39,7 +39,7 @@ const AboutSubreddit: React.FC = () => {
                   padding: "1rem"
                 }}
               >
-                <Typography variant="h5">About Community</Typography>
+                <Typography variant="h6">About Community</Typography>
               </Box>
 
               <Divider />

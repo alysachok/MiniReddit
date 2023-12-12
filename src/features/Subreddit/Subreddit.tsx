@@ -1,5 +1,5 @@
 // import { useTheme } from "@mui/material/styles"
-import { Avatar, Box, Paper, Stack, Typography } from "@mui/material"
+import { Avatar, Box, Paper, Stack, Typography, useTheme } from "@mui/material"
 import React from "react"
 import { useParams } from "react-router-dom"
 import { useGetSubredditQuery } from "../../api/apiSlice"
@@ -9,13 +9,13 @@ import WithLoading from "../Utils/WithLoading"
 
 const Subreddit: React.FC = () => {
   const { subreddit = "" } = useParams<{ subreddit?: string }>()
-  // const theme = useTheme()
+  const theme = useTheme()
   const { data, error, isFetching, refetch } = useGetSubredditQuery(subreddit)
 
   const styles = {
     mainContaner: {
       flexDirection: { xs: "column", sm: "column", md: "row" },
-      width: { xs: "100%", md: "90%" }
+      width: { xs: "100%", sm: "100%", md: "90%" }
     },
 
     headerContaner: {
@@ -23,12 +23,13 @@ const Subreddit: React.FC = () => {
       justifyContent: "center",
       alignItems: "center",
       width: "90%",
-      marginBottom: "0.5rem",
+      marginBottom: { xs: theme.spacing(1), md: theme.spacing(2) },
       display: { xs: "none", md: "block" }
     },
 
     subredditContaner: {
-      marginRight: { xs: "0rem", md: "1rem" }
+      marginRight: { xs: "0rem", md: "1rem" },
+      marginBottom: { xs: "0.5rem" }
     }
   }
 
@@ -36,13 +37,12 @@ const Subreddit: React.FC = () => {
 
   return (
     <WithLoading error={error} isFetching={isFetching} onRetry={refetch}>
-      <Stack alignItems="center">
+      <Stack alignItems="center" padding={{ xs: "0.5rem" }}>
         {dataInfo ? (
           <Paper elevation={3} sx={styles.headerContaner}>
             <Box
               sx={{
                 display: "flex",
-                // backgroundColor: theme.palette.background.default,
                 alignItems: "center",
                 flexDirection: "column",
                 justifyContent: "center",

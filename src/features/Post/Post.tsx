@@ -15,7 +15,7 @@ const Post: React.FC = () => {
   const styles = {
     mainContaner: {
       flexDirection: { xs: "column", sm: "column", md: "row" },
-      width: { xs: "100%", md: "90%" }
+      width: { xs: "100%", sm: "100%", md: "90%" }
     },
 
     postContaner: {
@@ -23,19 +23,20 @@ const Post: React.FC = () => {
       flexDirection: "column",
       width: "100%",
       height: "100%",
-      marginBottom: "1rem",
+      overflow: "auto",
       alignItems: "center"
     }
   }
 
-  console.log("post", data?.data?.children?.[0]?.data.score)
-
   const post = data?.data?.children?.[0]?.data
 
   return (
-    <Stack alignItems="center">
+    <Stack alignItems="center" padding={{ xs: "0.5rem", sm: "0.5rem" }}>
       <Stack sx={styles.mainContaner}>
-        <Box marginRight={{ xs: "0rem", md: "1rem" }}>
+        <Box
+          marginBottom={{ xs: "0.5rem", sx: "0.8rem", md: "1rem" }}
+          marginRight={{ sx: "0.8rem", md: "1rem" }}
+        >
           <AboutSubreddit />
         </Box>
         <Paper sx={styles.postContaner}>

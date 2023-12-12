@@ -67,13 +67,10 @@ const AuthorPage: React.FC = () => {
       maxHeight: "100%",
       width: "100%",
       height: "100%",
-      overflow: "auto",
-      "&:hover": {
-        boxShadow: "1px 2px 2px gray"
-      }
+      overflow: "auto"
     },
 
-    noCommentsContainer: {
+    noPostsContainer: {
       display: "flex",
       justifyContent: "center",
       paddingTop: "2.5rem",
@@ -91,7 +88,7 @@ const AuthorPage: React.FC = () => {
       marginTop: "auto",
       height: "auto",
       "&:hover": {
-        boxShadow: "3px 3px 3px gray"
+        boxShadow: "0.5px 2px 2px gray"
       }
     },
 
@@ -101,7 +98,7 @@ const AuthorPage: React.FC = () => {
       justifyContent: "center",
       alignItems: "center",
       marginTop: "0rem",
-      marginBottom: { xs: theme.spacing(1), md: theme.spacing(2.5) }
+      marginBottom: { xs: theme.spacing(1), md: theme.spacing(2) }
     },
 
     vote: {
@@ -118,6 +115,11 @@ const AuthorPage: React.FC = () => {
       display: "flex",
       flexDirection: "row",
       margin: "0.5rem"
+    },
+
+    aboutAutorContaner: {
+      marginRight: { xs: "0rem", md: "1rem" },
+      display: { xs: "block", sx: "block", md: "inline" }
     }
   }
 
@@ -125,16 +127,16 @@ const AuthorPage: React.FC = () => {
 
   return (
     <WithLoading error={error} isFetching={isFetching} onRetry={refetch}>
-      <Stack alignItems="center">
+      <Stack alignItems="center" padding={{ xs: "0.5rem", sm: "0rem" }}>
         <Stack sx={styles.mainContaner}>
-          <Box display={{ xs: "block", md: "none" }}>
+          <Stack sx={styles.aboutAutorContaner}>
             <AboutAuthor />
-          </Box>
+          </Stack>
           <Box>
             {userData.length === 0 ? (
-              <Box sx={styles.noCommentsContainer}>
+              <Box sx={styles.noPostsContainer}>
                 <SpeakerNotesOffOutlinedIcon />
-                <Typography> No Posts Yet</Typography>
+                <Typography marginRight="1rem"> No Posts Yet</Typography>
               </Box>
             ) : (
               userData.map((post: PostData) => (
@@ -189,9 +191,6 @@ const AuthorPage: React.FC = () => {
                 </Paper>
               ))
             )}
-          </Box>
-          <Box display={{ xs: "none", md: "block" }}>
-            <AboutAuthor />
           </Box>
         </Stack>
       </Stack>

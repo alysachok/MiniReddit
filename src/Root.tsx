@@ -17,21 +17,16 @@ import Typography from "@mui/material/Typography"
 import { useTheme } from "@mui/material/styles"
 import * as React from "react"
 import { Suspense } from "react"
-import {
-  Link,
-  Navigate,
-  Route,
-  Link as RouterLink,
-  Routes
-} from "react-router-dom"
+import { Link, Navigate, Route, Routes } from "react-router-dom"
 import { AppBar, DrawerHeader, Main } from "../src/features/Layout/Layout"
 import AuthorPage from "./features/AuthorPage/AuthorPage"
+import ErrorPage from "./features/ErrorPage/ErrorPage"
 import Home from "./features/Home/Home"
 import Post from "./features/Post/Post"
 import Search from "./features/Search/Search"
 import Subreddit from "./features/Subreddit/Subreddit"
 import { ThemeSwitcher } from "./features/Utils/ThemeSwitcher"
-import logo from "./logo.png"
+import logo from "./images/logo.png"
 
 const drawerWidth = 240
 
@@ -54,7 +49,7 @@ export default function App() {
       width: "100%",
       height: "100%",
       overflowY: "auto",
-      padding: { xs: "0.5rem" }
+      padding: { xs: "0rem", sm: "0.8rem", md: "1rem" }
     },
 
     logoTypography: {
@@ -75,7 +70,6 @@ export default function App() {
     },
 
     openDrawerButton: {
-      // display: { xs: "none", sm: "none", md: "block" },
       display: "block",
       ...(open && { display: "none" })
     }
@@ -85,8 +79,12 @@ export default function App() {
     <Box>
       <CssBaseline />
       <AppBar open={open} position="fixed">
-        <Toolbar sx={{ display: "flex" }}>
-          <Stack alignItems="center" direction="row">
+        <Toolbar
+          sx={{
+            display: "flex"
+          }}
+        >
+          <Stack alignItems="center" direction="row" marginRight="1rem">
             <Link to="/">
               <img alt="logo" height="50" src={logo} width="50" />
             </Link>
@@ -123,6 +121,7 @@ export default function App() {
             <Route element={<Subreddit />} path="/r/:subreddit" />
             <Route element={<AuthorPage />} path="/user/:author" />
             <Route element={<Navigate replace to="/all/top" />} path="/" />
+            <Route element={<ErrorPage />} path="*" />
           </Routes>
         </Suspense>
       </Main>
@@ -133,7 +132,10 @@ export default function App() {
         variant="persistent"
       >
         <DrawerHeader>
-          <IconButton onClick={handleDrawerClose}>
+          <IconButton
+            data-testid="drawer-toggle-button"
+            onClick={handleDrawerClose}
+          >
             {theme.direction === "rtl" ? (
               <ChevronLeftIcon />
             ) : (
@@ -141,36 +143,54 @@ export default function App() {
             )}
           </IconButton>
 
-          <Typography>User Settings</Typography>
+          <Typography marginLeft="1rem">User Settings</Typography>
         </DrawerHeader>
         <Divider />
         <List>
           <ListItem disablePadding>
-            <ListItemButton>
-              <ThemeSwitcher />
-            </ListItemButton>
+            <ThemeSwitcher />
           </ListItem>
 
-          <RouterLink
-            style={{ textDecoration: "none", color: "inherit" }}
-            to="/r/javascript"
+          <a
+            href="https://github.com/alysachok/MiniReddit"
+            rel="noopener noreferrer"
+            style={{
+              textDecoration: "none",
+              color: theme.palette.primary.main
+            }}
+            target="_blank"
           >
-            <ListItem disablePadding>
-              {/* <Link href={post.url} rel="noopener" target="_blank">
-                {extractPartUrl(post.url)}
-              </Link> */}
-              <ListItemButton>
-                <ListItemIcon>
-                  <Avatar
-                    alt="avatar of subreddit"
-                    src="https://b.thumbs.redditmedia.com/AltCa25flSy96k0VDTcXUseNPu25FWaInEl1LOvkbqs.png"
-                    sx={{ width: 35, height: 35 }}
-                  />
-                </ListItemIcon>
-                <ListItemText primary="My GitHub" />
-              </ListItemButton>
-            </ListItem>
-          </RouterLink>
+            <ListItemButton>
+              <ListItemIcon>
+                <Avatar
+                  alt="avatar of subreddit"
+                  src="https://b.thumbs.redditmedia.com/AltCa25flSy96k0VDTcXUseNPu25FWaInEl1LOvkbqs.png"
+                  sx={{ width: 25, height: 25 }}
+                />
+              </ListItemIcon>
+              <ListItemText primary="Sourсe Code" />
+            </ListItemButton>
+          </a>
+          <a
+            href="https://www.reddit.com/"
+            rel="noopener noreferrer"
+            style={{
+              textDecoration: "none",
+              color: theme.palette.primary.main
+            }}
+            target="_blank"
+          >
+            <ListItemButton>
+              <ListItemIcon>
+                <Avatar
+                  alt="avatar of subreddit"
+                  src={logo}
+                  sx={{ width: 27, height: 27 }}
+                />
+              </ListItemIcon>
+              <ListItemText primary="Visit Reddit" />
+            </ListItemButton>
+          </a>
         </List>
       </Drawer>
     </Box>

@@ -1,70 +1,77 @@
-import { ChangeEvent, FC, useState } from "react"
-/** @jsxImportSource @emotion/react */
-import { css } from "@emotion/react"
-import CloseIcon from "@mui/icons-material/Close"
+import ClearIcon from "@mui/icons-material/Clear"
 import SearchIcon from "@mui/icons-material/Search"
-import { Theme, useTheme } from "@mui/material"
-import Box from "@mui/material/Box"
-import InputAdornment from "@mui/material/InputAdornment"
+import { Box, useTheme } from "@mui/material"
+import IconButton from "@mui/material/IconButton"
 import TextField from "@mui/material/TextField"
+import { ChangeEvent, useEffect, useState } from "react"
+import { useLocation, useNavigate } from "react-router-dom"
 
-const getStyles = (theme: Theme) => ({
-  search: css({
-    "& .MuiOutlinedInput-notchedOutline": {
-      borderRadius: 20
-    },
-    "& .MuiOutlinedInput-root": {
-      "&.Mui-focused fieldset": {
-        // - Set the Input border when parent is focused
-        borderColor: theme.palette.primary.light
-      }
-    }
-  })
-})
-
-const SearchBar: FC = () => {
+const SearchBar = () => {
+  const [searchTerm, setSearchTerm] = useState("")
+  const navigate = useNavigate()
+  const location = useLocation()
   const theme = useTheme()
-  const styles = getStyles(theme)
 
-  // State to store value from the input field
-  const [inputValue, setInputValue] = useState("")
-
-  // Input Field handler
-  const handleUserInput = (e: ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.target.value)
+  const styles = {
+    mainContaner: {
+      backgroundColor: theme.palette.background.paper
+    }
   }
 
-  // Reset Input Field handler
-  const resetInputField = () => {
-    setInputValue("")
+  const handleSearch = () => {
+    if (searchTerm) {
+      navigate(`/r/${searchTerm}`)
+    }
   }
+
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(e.target.value)
+  }
+
+  const handleClear = () => {
+    setSearchTerm("")
+  }
+
+  useEffect(() => {
+    const pathSubreddit = location.pathname.split("/")[2]
+
+    if (pathSubreddit === searchTerm) {
+      setSearchTerm(searchTerm)
+    } else {
+      setSearchTerm("")
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location.pathname])
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        ml: { xs: theme.spacing(1), md: theme.spacing(5) }
-      }}
-    >
+    <Box sx={styles.mainContaner}>
       <TextField
         InputProps={{
           startAdornment: (
-            <InputAdornment position="start">
-              <SearchIcon sx={{ color: "action.active" }} />
-            </InputAdornment>
+            <IconButton
+              onClick={handleSearch}
+              size="small"
+              sx={{ cursor: "pointer", p: "0.1rem" }}
+            >
+              <SearchIcon />
+            </IconButton>
           ),
-          endAdornment: (
-            <InputAdornment position="end">
-              <CloseIcon onClick={resetInputField} />
-            </InputAdornment>
+          endAdornment: searchTerm && (
+            <IconButton
+              onClick={handleClear}
+              size="small"
+              sx={{ cursor: "pointer" }}
+            >
+              <ClearIcon />
+            </IconButton>
           )
         }}
-        css={styles.search}
-        id="outlined-adornment"
-        onChange={handleUserInput}
-        placeholder="Search"
+        fullWidth
+        onChange={handleInputChange}
+        onKeyDown={(e) => e.key === "Enter" && handleSearch()}
         size="small"
-        value={inputValue}
+        sx={{ borderRadius: "1rem" }}
+        value={searchTerm}
         variant="outlined"
       />
     </Box>

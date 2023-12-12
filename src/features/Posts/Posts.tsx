@@ -61,26 +61,28 @@ const Posts: FC<PostsProps> = ({ subreddit }) => {
   const styles = {
     mainContaner: {
       height: "auto",
-      width: "100%",
-      "&:hover": {
-        boxShadow: "3px 3px 3px gray"
-      }
+      width: "100%"
     },
 
     postWrapper: {
       display: "flex",
       height: "100%",
+      width: "100%",
+
+      overflow: "auto",
+      overflowWrap: "break-word",
       justifyContent: "center",
       alignItems: "center",
       "&:hover": {
         boxShadow: "0.5px 2px 2px gray"
       },
-      marginBottom: { xs: theme.spacing(1), md: theme.spacing(2.5) }
+      marginBottom: { xs: theme.spacing(1), md: theme.spacing(2) }
     },
 
     vote: {
-      width: { xs: "15%", md: "10%" },
-      display: "flex",
+      display: { xs: "none", sm: "flex", md: "flex" },
+      width: { sm: "15%", md: "10%" },
+      fontSize: { sm: "0.8rem", md: "1rem" },
       flexDirection: "column",
       justifyContent: "flex-start",
       alignItems: "center",
@@ -106,15 +108,14 @@ const Posts: FC<PostsProps> = ({ subreddit }) => {
     }
   }
 
-  console.log(data?.data?.children)
-
   return (
     <WithLoading error={error} isFetching={isFetching} onRetry={refetch}>
       <Stack alignItems="center">
         <Box
           sx={{
             justifyContent: "center",
-            alignItems: "center"
+            alignItems: "center",
+            width: "100%"
           }}
         >
           {data?.data?.children?.map((post: PostData) => (
@@ -145,7 +146,10 @@ const Posts: FC<PostsProps> = ({ subreddit }) => {
                             }}
                           >
                             <ModeCommentOutlinedIcon />
-                            <Typography fontSize="0.9rem" marginLeft="0.4rem">
+                            <Typography
+                              fontSize={{ xs: "0.8rem", md: "0.9rem" }}
+                              marginLeft="0.4rem"
+                            >
                               {formatNumber(post.data.num_comments)}
 
                               {post.data.num_comments === 1

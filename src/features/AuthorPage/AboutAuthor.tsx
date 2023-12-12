@@ -28,7 +28,7 @@ const AboutSubreddit: React.FC = () => {
           elevation={3}
           sx={{
             width: { xs: "100%", md: "20rem" },
-            marginBottom: "1rem"
+            marginBottom: { xs: "0.5rem", sm: "0.5rem", md: "1rem" }
           }}
         >
           {authorData ? (

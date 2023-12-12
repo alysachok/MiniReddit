@@ -56,24 +56,24 @@ const Comments: React.FC = () => {
       display: "flex",
       flexDirection: "row",
       alignItems: "center",
-      color: theme.palette.primary.main,
       padding: "0.3rem",
       spacing: { xs: theme.spacing(0.5), md: theme.spacing(1) },
       width: "100%"
     },
 
     commentContaner: {
-      backgroundColor: theme.palette.background.default,
-      margin: { xs: "0.5rem", md: "0.8rem" },
+      marginTop: { xs: "0.5rem", md: "0.8rem" },
       paddingLeft: { xs: "1rem", md: "1.5rem" },
+      paddingRight: { xs: "1rem", md: "1.5rem" },
 
       "&:hover": {
-        boxShadow: "1px 2px 2px gray"
+        boxShadow: "0.5px 1px 1px gray"
       }
     },
 
     commentBody: {
-      padding: "0.5rem",
+      paddingLeft: "0.5rem",
+      paddingRight: "0.5rem",
       overflowWrap: "break-word",
       fontSize: { xs: "0.8rem", md: "0.9rem" }
     }
@@ -95,7 +95,12 @@ const Comments: React.FC = () => {
               marginLeft={{ xs: "1rem", md: "2rem" }}
               paddingTop={{ xs: "1rem", md: "1.5rem" }}
             >
-              <Typography sx={{ fontSize: { xs: "1rem", md: "1.2rem" } }}>
+              <Typography
+                sx={{
+                  fontSize: { xs: "1rem", md: "1.2rem" },
+                  color: theme.palette.primary.main
+                }}
+              >
                 Comments
               </Typography>
             </Box>
@@ -103,7 +108,12 @@ const Comments: React.FC = () => {
             {data?.[1]?.data?.children?.length === 0 ? (
               <Box sx={styles.noCommentsContainer}>
                 <SpeakerNotesOffOutlinedIcon />
-                <Typography sx={{ fontSize: { xs: "1rem", md: "1.2rem" } }}>
+                <Typography
+                  sx={{
+                    fontSize: { xs: "1rem", md: "1.2rem" },
+                    marginLeft: "1rem"
+                  }}
+                >
                   {" "}
                   No Comments Yet
                 </Typography>
