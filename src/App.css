@@ -4,3 +4,5 @@
   font-family: sans-serif;
   box-sizing: border-box;
 }
+
+/* TODO: this file is not neccessary. <CssBaseline /> in Root resets styles instead */

@@ -1,8 +1,8 @@
 import { FC, lazy } from "react"
-import { createBrowserRouter, RouterProvider } from "react-router-dom"
+import { RouterProvider, createBrowserRouter } from "react-router-dom"
 import ErrorPage from "./ErrorPage"
 
-const Root = lazy(async () => await import("./Root"))
+const Root = lazy(async () => await import("./Root")) // TODO: no need to lazy load this becasue it will be loaded always
 
 const router = createBrowserRouter([
   {

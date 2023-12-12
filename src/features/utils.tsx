@@ -11,7 +11,7 @@ const posts: Post[] = [
     title: "Funny",
     tags: ["new"],
     image:
-      "https://media.istockphoto.com/id/1322277517/photo/wild-grass-in-the-mountains-at-sunset.jpg?s=612x612&w=0&k=20&c=6mItwwFFGqKNKEAzv0mv6TaxhLN3zSE43bWmFN--J5w="
+      "https://media.istockphoto.com/id/1322277517/photo/wild-grass-in-the-mountains-at-sunset.jpg?s=612x612&w=0&k=20&c=6mItwwFFGqKNKEAzv0mv6TaxhLN3zSE43bWmFN--J5w=" // TODO: use Material UI Icons instead of these links
   },
   {
     id: 1,
@@ -101,6 +101,7 @@ export const formatTime = (dateUtc: number) => {
   return formattedDate
 }
 
+// TODO: consider using a library like "dayjs" instead of these custom formatting functions
 export const formatNumber = (value: number | undefined): string => {
   if (value === undefined || value === null) {
     return "vote" // Or any other default value you prefer

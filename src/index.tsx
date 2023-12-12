@@ -1,8 +1,8 @@
+import { ThemeProvider, createTheme } from "@mui/material/styles"
 import React from "react"
 import { createRoot } from "react-dom/client"
 import App from "./App"
 import "./index.css"
-import { ThemeProvider, createTheme } from "@mui/material/styles"
 
 const theme = createTheme({
   palette: {
@@ -24,7 +24,7 @@ const root = createRoot(container)
 
 root.render(
   <React.StrictMode>
-    {/* <Provider store={store}> */}
+    {/* <Provider store={store}>  TODO: remove all unused code, like this one */}
     <ThemeProvider theme={theme}>
       <App />
     </ThemeProvider>

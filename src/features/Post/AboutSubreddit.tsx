@@ -1,10 +1,10 @@
+import { Box, Stack } from "@mui/material"
+import Avatar from "@mui/material/Avatar"
+import Divider from "@mui/material/Divider"
+import Paper from "@mui/material/Paper"
+import Typography from "@mui/material/Typography"
 import React, { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import Avatar from "@mui/material/Avatar"
-import Typography from "@mui/material/Typography"
-import { Stack, Box } from "@mui/material"
-import Paper from "@mui/material/Paper"
-import Divider from "@mui/material/Divider"
 import { formatNumber, formatTime } from "../utils"
 import BasicList from "./FeaturedSubreddits"
 
@@ -20,7 +20,7 @@ const AboutSubreddit: React.FC = () => {
         )
         const data = await response.json()
 
-        console.log(data)
+        console.log(data) // TODO: remove all console.log
 
         if (data?.data) {
           setSubredditData(data.data)

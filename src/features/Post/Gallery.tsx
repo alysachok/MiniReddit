@@ -1,8 +1,8 @@
-import React, { useState } from "react"
-import { Box } from "@mui/material"
 import NavigateBeforeRoundedIcon from "@mui/icons-material/NavigateBeforeRounded"
 import NavigateNextRoundedIcon from "@mui/icons-material/NavigateNextRounded"
+import { Box } from "@mui/material"
 import { useTheme } from "@mui/material/styles"
+import React, { useState } from "react"
 
 interface Photo {
   id: string
@@ -31,6 +31,7 @@ const Gallery: React.FC<GalleryProps> = ({ photos }) => {
   const currentPhotoNumber = currentIndex + 1
   const totalPhotos = photos.length
 
+  // TODO: put all these inside one object "styles"
   const galleryContainerStyle = {
     display: "flex",
     flexDirection: "row",

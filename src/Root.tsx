@@ -1,31 +1,31 @@
-import * as React from "react"
-import { useTheme } from "@mui/material/styles"
-import Box from "@mui/material/Box"
-import Drawer from "@mui/material/Drawer"
-import Toolbar from "@mui/material/Toolbar"
-import CssBaseline from "@mui/material/CssBaseline"
-import List from "@mui/material/List"
-import Divider from "@mui/material/Divider"
-import IconButton from "@mui/material/IconButton"
-import MenuIcon from "@mui/icons-material/Menu"
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft"
 import ChevronRightIcon from "@mui/icons-material/ChevronRight"
+import GitHubIcon from "@mui/icons-material/GitHub"
+import MenuIcon from "@mui/icons-material/Menu"
+import InboxIcon from "@mui/icons-material/MoveToInbox"
+import { Stack } from "@mui/material"
+import Box from "@mui/material/Box"
+import CssBaseline from "@mui/material/CssBaseline"
+import Divider from "@mui/material/Divider"
+import Drawer from "@mui/material/Drawer"
+import IconButton from "@mui/material/IconButton"
+import List from "@mui/material/List"
 import ListItem from "@mui/material/ListItem"
 import ListItemButton from "@mui/material/ListItemButton"
 import ListItemIcon from "@mui/material/ListItemIcon"
 import ListItemText from "@mui/material/ListItemText"
-import InboxIcon from "@mui/icons-material/MoveToInbox"
-import Home from "./features/Home/Home"
-import Subreddit from "./features/Subreddit/Subreddit"
-import Post from "./features/Post/Post"
-import { Suspense } from "react"
-import { Route, Routes, Link, Navigate } from "react-router-dom"
-import Search from "./features/Search/Search"
+import Toolbar from "@mui/material/Toolbar"
 import Typography from "@mui/material/Typography"
+import { useTheme } from "@mui/material/styles"
+import * as React from "react"
+import { Suspense } from "react"
+import { Link, Navigate, Route, Routes } from "react-router-dom"
+import { AppBar, DrawerHeader, Main } from "../src/features/Layout/Layout"
+import Home from "./features/Home/Home"
+import Post from "./features/Post/Post"
+import Search from "./features/Search/Search"
+import Subreddit from "./features/Subreddit/Subreddit"
 import logo from "./logo.png"
-import { Stack } from "@mui/material"
-import { Main, AppBar, DrawerHeader } from "../src/features/Layout/Layout"
-import GitHubIcon from "@mui/icons-material/GitHub"
 // import Comments from "./features/Comments/Comments"
 
 const drawerWidth = 240
@@ -44,7 +44,7 @@ export default function App() {
 
   const styles = {
     mainContaner: {
-      backgroundColor: theme.palette.secondary.light,
+      backgroundColor: theme.palette.secondary.light, // TODO: do not hardcode "light" or "dark". avoid setting background directly when possible
       position: "absolute",
       width: "100%",
       height: "100%",
@@ -107,9 +107,9 @@ export default function App() {
           </Stack>
         </Toolbar>
       </AppBar>
-      <Main open={open} sx={styles.mainContaner}>
+      <Main id="test" open={open} sx={styles.mainContaner}>
         <DrawerHeader />
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<div>Loading...</div>}> 
           <Routes>
             <Route element={<Home />} path="/all/top" />
             <Route element={<Home />} path="/popular" />
@@ -139,11 +139,12 @@ export default function App() {
         </DrawerHeader>
         <Divider />
         <List>
+          {/* TODO: dark mode doesn't work */}
           {["Dark mode", "GitHub", "Visit Reddit", "New"].map((text, index) => (
             <ListItem disablePadding key={text}>
               <ListItemButton>
                 <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <GitHubIcon />}
+                  {index % 2 === 0 ? <InboxIcon /> : <GitHubIcon />} {/* TODO: what is this? Just make the links and their icons static */}
                 </ListItemIcon>
                 <ListItemText primary={text} />
               </ListItemButton>
