@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/%20//github.com/alysachok/MiniReddit.git/static/css/main.afcd4f1a.css",
-    "main.js": "/%20//github.com/alysachok/MiniReddit.git/static/js/main.079daea6.js",
-    "static/js/854.6e330b76.chunk.js": "/%20//github.com/alysachok/MiniReddit.git/static/js/854.6e330b76.chunk.js",
-    "static/js/65.97c737f3.chunk.js": "/%20//github.com/alysachok/MiniReddit.git/static/js/65.97c737f3.chunk.js",
-    "static/media/logo.png": "/%20//github.com/alysachok/MiniReddit.git/static/media/logo.7e6262d0013e083557b4.png",
-    "index.html": "/%20//github.com/alysachok/MiniReddit.git/index.html",
-    "main.afcd4f1a.css.map": "/%20//github.com/alysachok/MiniReddit.git/static/css/main.afcd4f1a.css.map",
-    "main.079daea6.js.map": "/%20//github.com/alysachok/MiniReddit.git/static/js/main.079daea6.js.map",
-    "854.6e330b76.chunk.js.map": "/%20//github.com/alysachok/MiniReddit.git/static/js/854.6e330b76.chunk.js.map",
-    "65.97c737f3.chunk.js.map": "/%20//github.com/alysachok/MiniReddit.git/static/js/65.97c737f3.chunk.js.map"
+    "main.css": "/alysachok/MiniReddit.git/static/css/main.afcd4f1a.css",
+    "main.js": "/alysachok/MiniReddit.git/static/js/main.0e1eb3bf.js",
+    "static/js/854.6e330b76.chunk.js": "/alysachok/MiniReddit.git/static/js/854.6e330b76.chunk.js",
+    "static/js/65.97c737f3.chunk.js": "/alysachok/MiniReddit.git/static/js/65.97c737f3.chunk.js",
+    "static/media/logo.png": "/alysachok/MiniReddit.git/static/media/logo.7e6262d0013e083557b4.png",
+    "index.html": "/alysachok/MiniReddit.git/index.html",
+    "main.afcd4f1a.css.map": "/alysachok/MiniReddit.git/static/css/main.afcd4f1a.css.map",
+    "main.0e1eb3bf.js.map": "/alysachok/MiniReddit.git/static/js/main.0e1eb3bf.js.map",
+    "854.6e330b76.chunk.js.map": "/alysachok/MiniReddit.git/static/js/854.6e330b76.chunk.js.map",
+    "65.97c737f3.chunk.js.map": "/alysachok/MiniReddit.git/static/js/65.97c737f3.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.afcd4f1a.css",
-    "static/js/main.079daea6.js"
+    "static/js/main.0e1eb3bf.js"
   ]
 }
