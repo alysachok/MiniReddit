@@ -1,4 +1,4 @@
-#MiniReddit
+# MiniReddit
 
 ## Description
 
