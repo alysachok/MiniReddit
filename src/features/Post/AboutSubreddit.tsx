@@ -7,7 +7,6 @@ import { formatNumber, formatTime } from "../Utils/utils"
 import BasicList from "./FeaturedSubreddits"
 
 const AboutSubreddit: React.FC = () => {
-  // const theme = useTheme()
   const { subreddit = "" } = useParams<{
     subreddit?: string
   }>()

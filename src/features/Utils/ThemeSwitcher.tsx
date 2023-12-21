@@ -22,8 +22,6 @@ function ThemeSwitcher() {
 function ToggleColorModeProvider({ children }: { children: React.ReactNode }) {
   const [isDarkMode, setIsDarkMode] = React.useState(false)
 
-  console.log(isDarkMode)
-
   const colorMode = React.useMemo(
     () => ({
       toggleColorMode: () => {
