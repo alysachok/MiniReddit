@@ -1,46 +1,40 @@
-# Getting Started with Create React App
+#MiniReddit
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) TS template.
+## Description
 
-## Available Scripts
+Mini Reddit is a dynamic web application created using a modern tech stack, including React, TypeScript, RTK Query, and React Testing Library. This application leverages the Reddit API to bring a sleek and user-friendly interface for browsing Reddit content.
 
-In the project directory, you can run:
+## Features
+View Popular Posts: Easily browse through a list of popular posts, offering a glimpse into what's trending on Reddit.
+Search Functionality: Utilize the search feature to find specific subreddits, tailoring your browsing experience to your interests.
+Dark Mode: Switch to Dark Mode for a comfortable viewing experience, especially in low-light conditions.
+Subreddit Page: Explore individual subreddit pages to dive deep into specific community discussions and content.
+Author Page: View details about post authors, including their profile and other contributions.
+Comments: Read comments on posts to engage with the community and understand different perspectives.
+Copy Link for Posts: Easily copy the link to a post to share it with others or reference it later.
+External Links: Some posts provide external links for further reading or exploration.
+Responsive Design: Enjoy a seamless experience across various devices and screen sizes.
 
-### `npm start`
+##TechnologiesUsed
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+React: For building the user interface.
+TypeScript: To enhance code quality and readability.
+RTK Query: For efficient and easy state management.
+React Testing Library: For reliable and maintainable tests.
+Reddit API: For fetching real-time data and content from Reddit.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Installation
 
-### `npm test`
+To run Mini Reddit locally, follow these steps:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Clone the repository:
+    git clone https://github.com/alysachok/MiniReddit.git
+2. Navigate to the project directory:
+     cd [local-repository]
+3. Install the dependencies:
+     npm install
+4. Start the development server:
+     npm start
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Contributing
+Contributions to the Mini Reddit project are welcome. Please follow the standard fork-and-pull request workflow. If you have any suggestions or encounter issues, feel free to open an issue or submit a pull request.
