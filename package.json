@@ -1,5 +1,6 @@
 {
   "name": "mini-reddit",
+  "homepage": "https://alysachok.github.io/MiniReddit/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -40,6 +41,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -67,6 +70,7 @@
   "devDependencies": {
     "@testing-library/user-event": "^14.5.1",
     "@types/lodash": "^4.14.200",
+    "gh-pages": "^6.1.0",
     "msw": "^2.0.6"
   }
 }
